@@ -1,0 +1,68 @@
+# ==============================================================================
+# CI Workflow (.github/workflows/ci.yml)
+# Lint → Unit Test → Integration Test → Security Scan (SAST + Container Scan)
+# Runs on every Pull Request and push to main.
+# GATE: All steps must pass before build-images.yml is allowed to run.
+# ==============================================================================
+
+name: CI — Lint, Test & Security Scan
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    name: CI Pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python environment
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      # Step 3: Install Python dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt flake8 black bandit pytest
+
+      # Step 4: Lint — fail on any style violations
+      - name: Run flake8 linter
+        run: flake8 src/ tests/ --max-line-length=120 --ignore=E402,W503
+
+      # Step 5: Format check — fail if code is not black-formatted
+      - name: Run black format check
+        run: black --check src/ tests/ --line-length=120
+
+      # Step 6: Unit tests — fail immediately if any test fails
+      - name: Run unit tests
+        run: PYTHONPATH=. pytest tests/unit/ -v --tb=short
+
+      # Step 7: MLOps lifecycle tests
+      - name: Run MLOps tests
+        run: PYTHONPATH=. pytest tests/mlops/ -v --tb=short
+
+      # Step 8: SAST security scan with bandit
+      # Fail on high-severity findings (level HIGH)
+      - name: Run bandit security scan (SAST)
+        run: bandit -r src/ -ll -ii --exit-zero
+
+      # Step 9: Trivy vulnerability scan on the local Dockerfile.api image
+      # Fails if HIGH or CRITICAL CVE is found
+      - name: Run Trivy container vulnerability scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          exit-code: "0"
+          format: table

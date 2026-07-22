@@ -1,0 +1,708 @@
+{
+  "generated_at": "1784648335.2471483",
+  "data_zip_source": "Extracted (ZIP removed)",
+  "code_zip_source": "Extracted (ZIP removed)",
+  "total_imported_files": 39,
+  "entries": [
+    {
+      "filename": "2025-11-15_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-15_traffic_data_from_traffic.csv",
+      "size_bytes": 566898,
+      "sha256": "3430418b678f7bc2e487bb5b730b52a246a581d09bf74cb7550a2e81bfeb2a3e",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6143,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-13_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-13_traffic_data_from_traffic.csv",
+      "size_bytes": 101655,
+      "sha256": "cbbc30496b1b3d4bfcabb1d49c11c9d6cb8ed57c306226909775948a79d92db5",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 1101,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-03_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-03_traffic_data_from_traffic.csv",
+      "size_bytes": 566463,
+      "sha256": "18b7b1777db6f7c7b5a9b2437bfe77a4494822b6cc9868124d4f03e33f9f05c6",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6142,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-07_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-07_traffic_data_from_traffic.csv",
+      "size_bytes": 631326,
+      "sha256": "858c721d57fa98f46002d1527f2a47e26c636fa500ecfa9688790f0d4cefd7f4",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6845,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-04_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-04_traffic_data_from_traffic.csv",
+      "size_bytes": 600871,
+      "sha256": "85280017525725aaebbbf43d74d37e4ef0a2824baaa855ff065f508bad6f216e",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6512,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-11_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-11_traffic_data_from_traffic.csv",
+      "size_bytes": 419252,
+      "sha256": "be851d964923b62b560801c4b26a6181e7c5c580b2c3da209b516cb604b610fe",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4548,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-02_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-02_traffic_data_from_traffic.csv",
+      "size_bytes": 446934,
+      "sha256": "c456514a7c6109d7a64aa971df07f5841486e5d6df7855e1d78f4f6a29b74fe3",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4846,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-21_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-21_traffic_data_from_traffic.csv",
+      "size_bytes": 659868,
+      "sha256": "3c6be70307efb6ccf6eacf0247163c7dab5cdb22b6920a1807275e5b710e092d",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 7147,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-24_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-24_traffic_data_from_traffic.csv",
+      "size_bytes": 371783,
+      "sha256": "0a7a48df63cabbd47662b20b53260aa61d607537e70901163d48034e77e1999b",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4033,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-09_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-09_traffic_data_from_traffic.csv",
+      "size_bytes": 494808,
+      "sha256": "d8a8e601518d6b3015f89316dc8c45baf0f7578ab4d8684498451104bb44b737",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5359,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-20_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-20_traffic_data_from_traffic.csv",
+      "size_bytes": 627962,
+      "sha256": "b90f870f0fd8a157d6bd4627ba12cc9eac88e5810168be77552e92f0c9e916de",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6808,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-10_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-10_traffic_data_from_traffic.csv",
+      "size_bytes": 481661,
+      "sha256": "a689f7e6d6841662b8f7939f7dc8fc4d20c78b175285611bd8cb1d8dd57bb22a",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5217,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-27_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-27_traffic_data_from_traffic.csv",
+      "size_bytes": 463349,
+      "sha256": "57fee6f7b1fb4f1e2abf0a03d1096c7b224de00d9152635fd039584201d15c10",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5023,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-18_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-18_traffic_data_from_traffic.csv",
+      "size_bytes": 464295,
+      "sha256": "d77633bee9f5c1f1b0cb16e90d7a94592fe9da5bd258883eeb1b96ac4d32cda1",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5033,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-25_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-25_traffic_data_from_traffic.csv",
+      "size_bytes": 399775,
+      "sha256": "98f23598ed28ac0fafd6ec99e3c4aa0241098dd83a68ada31ee8027fa3dcfb93",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4333,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-05_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-05_traffic_data_from_traffic.csv",
+      "size_bytes": 499245,
+      "sha256": "9b44cbf3fbd2c630084561cc68649898c7ebc0183413777dc2409b40b259db58",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5409,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-14_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-14_traffic_data_from_traffic.csv",
+      "size_bytes": 543055,
+      "sha256": "c8aef3cbd04f705fe3e624859330625ae3ac3482278b96083e3ea62e98d8987d",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5883,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-13_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-13_traffic_data_from_traffic.csv",
+      "size_bytes": 591085,
+      "sha256": "74d15dcf515e60fd912072522b7f23eeab0f7b92451a63156745912b68acd754",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6401,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-06_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-06_traffic_data_from_traffic.csv",
+      "size_bytes": 535601,
+      "sha256": "5dd9deee9a4f71e523159709c00294575dbc98af5db4139b3bd8a24fc7c8a571",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5800,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-11_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-11_traffic_data_from_traffic.csv",
+      "size_bytes": 395892,
+      "sha256": "bf627505f8f675746e1867db397a67e9f27377430ce264ceef0cc23623fd2176",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4292,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-30_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-30_traffic_data_from_traffic.csv",
+      "size_bytes": 262299,
+      "sha256": "27f227226fd612dddfe01c26a4f2ac2af6277e7b2b593b4da09c4f5e3095ceb4",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 2843,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-26_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-26_traffic_data_from_traffic.csv",
+      "size_bytes": 433094,
+      "sha256": "c71b5c945c97faf849b2fe6f6011e084835d6e390a15f2e8b030b6b267c6358d",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4698,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-23_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-23_traffic_data_from_traffic.csv",
+      "size_bytes": 558790,
+      "sha256": "043dd8a1f615d833ea35a9cf5352258d2cab4074785514dc2a2c6013c4e7844f",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6054,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-07_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-07_traffic_data_from_traffic.csv",
+      "size_bytes": 168517,
+      "sha256": "919c96c508540649be8133e0baad0b6faf4685974a0c721b2a9fb51409032a75",
+      "header": [
+        "\ufeffTimestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 1828,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-12_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-12_traffic_data_from_traffic.csv",
+      "size_bytes": 204592,
+      "sha256": "be63a029e914d6dfc8d89709ea013fa766c821198725a11dd8aace983bc5257e",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 2217,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-14_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-14_traffic_data_from_traffic.csv",
+      "size_bytes": 447905,
+      "sha256": "3104d986942d8e6f00c29e062b35b5e8fb857199b172ecb86389661e08fbd5f0",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4855,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-17_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-17_traffic_data_from_traffic.csv",
+      "size_bytes": 596383,
+      "sha256": "7c7846b22a17a801cdd82470494e8385e713bea585ec0e91b41f57fe83237600",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6470,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-19_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-19_traffic_data_from_traffic.csv",
+      "size_bytes": 549519,
+      "sha256": "016d81a4f4991471d442e02db69d61548917482a69fce78a9f15166fc133e980",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5957,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-10_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-10_traffic_data_from_traffic.csv",
+      "size_bytes": 460392,
+      "sha256": "7c8ef8df084639c6408f0f846fc2bd5d20eb8febb87a5cd5c481ffe931bf198d",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4995,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-08_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-08_traffic_data_from_traffic.csv",
+      "size_bytes": 234635,
+      "sha256": "15d972490c6503d2cea72db91b5d6350871e9b44f87a167ed6e9d0015b68379f",
+      "header": [
+        "\ufeffTimestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 2541,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-08_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-08_traffic_data_from_traffic.csv",
+      "size_bytes": 384310,
+      "sha256": "b33935d8d1ffe2af700cdbcc8f9ec36c8072b6c5c10e34fb0e936e4f1e071892",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4169,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-01_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-01_traffic_data_from_traffic.csv",
+      "size_bytes": 497958,
+      "sha256": "59a4778562430d6d60f84f265e4a014f0204a119682a398dbc1712f170f2d7fa",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 5398,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-09_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-09_traffic_data_from_traffic.csv",
+      "size_bytes": 233180,
+      "sha256": "15a2aafb0daa337a5f29a8ea0c6406adf420a2037e7c05d5dfac810df83f86a4",
+      "header": [
+        "\ufeffTimestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 2521,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-28_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-28_traffic_data_from_traffic.csv",
+      "size_bytes": 628961,
+      "sha256": "23ec75f221d2a676a6311a8587554a5c4f417c3cadcde3ed9ccfbbff0ca88bee",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6815,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-22_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-22_traffic_data_from_traffic.csv",
+      "size_bytes": 628452,
+      "sha256": "6db6b898802b134067ab0fa6867b41ab4c6198089c8ff790cb1e1eedc89fef63",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 6810,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-12-12_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-12-12_traffic_data_from_traffic.csv",
+      "size_bytes": 416998,
+      "sha256": "b0c167b39c0a379631e17193554221a6cbeced94749439a258e441d4bbe848f7",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4514,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "2025-11-29_traffic_data_from_traffic.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_raw/2025-11-29_traffic_data_from_traffic.csv",
+      "size_bytes": 444533,
+      "sha256": "b74ff4374df7b99664bf3cca7b91dd745222b57acf36dc368f37cc8d2cc44bdd",
+      "header": [
+        "Timestamp",
+        "Location/Street",
+        "District",
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence"
+      ],
+      "row_count": 4810,
+      "category": "lab_raw"
+    },
+    {
+      "filename": "data_converted.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/locations/data_converted.csv",
+      "size_bytes": 2548,
+      "sha256": "3e3106c557685606cc8e9f2d67cdaa42e0a7a74b50020e2857737a02f4876191",
+      "header": [
+        "\ufeffNo",
+        "Location/Street",
+        "District",
+        "Latitude,Longitude"
+      ],
+      "row_count": 37,
+      "category": "locations"
+    },
+    {
+      "filename": "process_data_spark.csv",
+      "relative_path": "/home/phucle/Desktop/lab5/data/lab_reference/process_data_spark.csv",
+      "size_bytes": 11787414,
+      "sha256": "066db25dd9bc57781e888b521958ca51bf73525ec88a25b486c95da80388cc05",
+      "header": [
+        "Latitude",
+        "Longitude",
+        "CurrentSpeed",
+        "FreeFlowSpeed",
+        "Confidence",
+        "Hour",
+        "Minute",
+        "DayOfWeek",
+        "Weekend",
+        "CongestionRatio"
+      ],
+      "row_count": 184175,
+      "category": "lab_reference"
+    }
+  ]
+}

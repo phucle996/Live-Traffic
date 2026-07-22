@@ -1,0 +1,47 @@
+# ==============================================================================
+# TP.HCM Grid Configuration (config/coverage/hcm_grid.yaml)
+# Phase HERE-3 — Cấu hình chia lưới cell TP.HCM để crawl theo khu vực
+# ==============================================================================
+city: "Ho Chi Minh City"
+version: "v1.0"
+grid:
+  default_cell_size_deg: 0.03  # ~3.3km x 3.3km mỗi cell
+  min_lat: 10.7000
+  max_lat: 10.9200
+  min_lon: 106.5500
+  max_lon: 106.8500
+  
+# Định nghĩa các zone ưu tiên đặc biệt trong thành phố
+priority_zones:
+  - id: "cell_q1_center"
+    name: "Quận 1 — Trung tâm"
+    priority: 1
+    bbox:
+      south: 10.7600
+      west: 106.6920
+      north: 10.7900
+      east: 106.7100
+  - id: "cell_binh_thanh"
+    name: "Bình Thạnh — Hàng Xanh"
+    priority: 1
+    bbox:
+      south: 10.7950
+      west: 106.7000
+      north: 10.8200
+      east: 106.7300
+  - id: "cell_tan_son_nhat"
+    name: "Tân Sơn Nhất"
+    priority: 1
+    bbox:
+      south: 10.8000
+      west: 106.6550
+      north: 10.8300
+      east: 106.6850
+  - id: "cell_thu_duc"
+    name: "TP. Thủ Đức — Xa lộ Hà Nội"
+    priority: 2
+    bbox:
+      south: 10.8450
+      west: 106.7700
+      north: 10.8900
+      east: 106.8200

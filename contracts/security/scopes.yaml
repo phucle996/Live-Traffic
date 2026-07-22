@@ -1,0 +1,14 @@
+# ==============================================================================
+# Scopes Definition Contract (contracts/security/scopes.yaml)
+# ==============================================================================
+scopes:
+  "traffic:read":
+    description: "Access to query real-time traffic speeds and segment data."
+  "prediction:execute":
+    description: "Access to execute inference pipelines and query AI prediction models."
+  "model:read":
+    description: "Access to query model metadata, active versions, and registry schema."
+  "model:reload":
+    description: "Privileged access to reload production models into hot memory."
+  "admin":
+    description: "Wildcard administrative access bypass."

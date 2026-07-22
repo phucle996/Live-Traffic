@@ -1,0 +1,83 @@
+# ==============================================================================
+# Streamlit Dashboard Deployment (deploy/kubernetes/dashboard-deployment.yaml)
+# 2 replicas for availability; reads from API via internal DNS service name
+# ==============================================================================
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-dashboard
+  namespace: production
+  labels:
+    app: traffic-dashboard
+    component: ui
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: traffic-dashboard
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+
+  template:
+    metadata:
+      labels:
+        app: traffic-dashboard
+        component: ui
+    spec:
+      serviceAccountName: traffic-prediction-sa
+      terminationGracePeriodSeconds: 15
+
+      # Spread dashboard pods across nodes
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: traffic-dashboard
+
+      containers:
+        - name: dashboard
+          image: ghcr.io/traffic-prediction/traffic-dashboard:IMAGE_TAG_PLACEHOLDER
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: streamlit
+              containerPort: 8501
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: traffic-prediction-config
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8501
+            initialDelaySeconds: 20
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traffic-dashboard
+  namespace: production
+  labels:
+    app: traffic-dashboard
+spec:
+  type: ClusterIP
+  selector:
+    app: traffic-dashboard
+  ports:
+    - name: streamlit
+      port: 80
+      targetPort: 8501

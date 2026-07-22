@@ -1,0 +1,20 @@
+# ==============================================================================
+# Model Promotion Gate Criteria (config/mlops/promotion_rules.yaml)
+# Defines thresholds a candidate model must meet before promoting to Production
+# ==============================================================================
+
+promotion_rules:
+  # Maximum acceptable RMSE (km/h) — model is rejected if RMSE exceeds this
+  maximum_rmse: 8.0
+
+  # Minimum acceptable R² coefficient of determination
+  minimum_r2: 0.60
+
+  # Minimum number of test rows required for statistical significance
+  minimum_test_rows: 1000
+
+  # Block promotion if schema breaking change is detected
+  require_no_breaking_schema_change: true
+
+  # Champion must outperform challenger by at least this margin (RMSE delta km/h)
+  champion_challenger_delta: 0.5

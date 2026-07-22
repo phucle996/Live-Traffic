@@ -1,0 +1,27 @@
+# ==============================================================================
+# Python Dependencies Specification (Pinned Versions for Reproducibility)
+# ==============================================================================
+
+# Core Data Processing & Big Analytics
+pyspark==3.5.0
+pandas==2.2.0
+numpy==1.26.4
+
+# Machine Learning & Scientific Computing
+scikit-learn==1.4.0
+
+# HTTP Communication & API Ingestion
+requests==2.31.0
+
+# Interactive Dashboard & Visualizations
+streamlit==1.31.0
+folium==0.15.1
+streamlit-folium==0.18.0
+
+# System Configuration & Secret Management
+pyyaml==6.0.1
+python-dotenv==1.0.1
+pydantic==2.6.1
+
+# Automated Testing Framework
+pytest==8.0.0

@@ -1,0 +1,18 @@
+groups:
+  - name: infrastructure_alerts
+    rules:
+      - alert: HDFSCapacityHigh
+        expr: hdfs_capacity_usage > 0.85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "HDFS cluster disk capacity exceeds 85%"
+
+      - alert: APIHighLatency
+        expr: prediction_latency_seconds_bucket{le="1.0"} < 0.95
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Prediction API p95 latency exceeds 1.0 second"

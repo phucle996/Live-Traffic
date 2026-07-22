@@ -1,0 +1,21 @@
+topics:
+  raw:
+    name: traffic.raw
+    partitions: 3
+    replication_factor: 1
+    retention_ms: 604800000 # 7 days
+  validated:
+    name: traffic.validated
+    partitions: 3
+    replication_factor: 1
+    retention_ms: 604800000 # 7 days
+  invalid:
+    name: traffic.invalid
+    partitions: 1
+    replication_factor: 1
+    retention_ms: 2592000000 # 30 days
+  dead_letter:
+    name: traffic.dead-letter
+    partitions: 1
+    replication_factor: 1
+    retention_ms: 2592000000 # 30 days

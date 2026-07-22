@@ -1,0 +1,28 @@
+# ==============================================================================
+# Production Profile Configuration (config/production.yaml)
+# ==============================================================================
+
+environment: production
+debug: false
+
+logging:
+  level: WARN
+  format: json
+
+security:
+  enforce_https: true
+  secret_provider: docker_secrets
+  docker_secrets_path: /run/secrets
+  auth_required: true
+  rate_limit_enabled: true
+  requests_per_minute: 60
+  mask_secrets_in_logs: true
+
+hdfs:
+  uri: hdfs://namenode:9000
+  raw_path: /traffic_project/raw
+  processed_path: /traffic_project/processed
+
+spark:
+  master: spark://spark-master:7077
+  app_name: TrafficFlowETL_Prod

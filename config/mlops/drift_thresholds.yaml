@@ -1,0 +1,21 @@
+# ==============================================================================
+# Drift Detection Thresholds (config/mlops/drift_thresholds.yaml)
+# Defines KS-test and distribution shift thresholds for automated rollback
+# ==============================================================================
+
+drift_thresholds:
+  # Kolmogorov-Smirnov statistic threshold for feature data drift
+  # Values closer to 1.0 = more drift. >0.15 triggers warning.
+  feature_drift_ks_stat: 0.15
+
+  # Minimum p-value below which drift is considered statistically significant
+  feature_drift_p_value: 0.05
+
+  # Maximum allowed mean prediction shift (km/h) relative to training baseline
+  prediction_drift_mean_delta: 5.0
+
+  # Maximum allowed standard deviation ratio: std_live / std_baseline
+  prediction_drift_std_ratio: 1.5
+
+  # Retraining is triggered if drift persists for this many consecutive checks
+  consecutive_drift_checks_to_retrain: 3

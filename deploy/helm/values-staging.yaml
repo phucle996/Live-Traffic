@@ -1,0 +1,29 @@
+# ==============================================================================
+# Staging Environment Values Override (deploy/helm/values-staging.yaml)
+# Overrides default values.yaml for staging namespace
+# ==============================================================================
+
+replicaCount: 1  # Single replica in staging to conserve resources
+
+ingress:
+  hosts:
+    - host: traffic-prediction.staging.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+hpa:
+  minReplicas: 1
+  maxReplicas: 3
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+env:
+  ENVIRONMENT: staging
+  LOG_LEVEL: DEBUG

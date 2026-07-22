@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SourceResolutionSchema",
+  "type": "object",
+  "description": "JSON Schema định nghĩa quy tắc phân giải và fallback giữa các nguồn dữ liệu giao thông",
+  "required": [
+    "primary_source",
+    "fallback_source",
+    "budget_limit_per_minute",
+    "auto_fallback_enabled"
+  ],
+  "properties": {
+    "primary_source": {
+      "type": "string",
+      "enum": ["tomtom_live", "lab_offline"],
+      "example": "tomtom_live"
+    },
+    "fallback_source": {
+      "type": "string",
+      "enum": ["lab_offline"],
+      "example": "lab_offline"
+    },
+    "budget_limit_per_minute": {
+      "type": "integer",
+      "minimum": 1,
+      "example": 60
+    },
+    "auto_fallback_enabled": {
+      "type": "boolean",
+      "example": true
+    }
+  }
+}

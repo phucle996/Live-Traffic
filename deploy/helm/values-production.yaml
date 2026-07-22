@@ -1,0 +1,37 @@
+# ==============================================================================
+# Production Environment Values Override (deploy/helm/values-production.yaml)
+# Overrides default values.yaml for production namespace with HA settings
+# ==============================================================================
+
+replicaCount: 3  # HA: minimum 3 replicas to survive node/AZ failure
+
+ingress:
+  hosts:
+    - host: traffic-prediction.production.local
+      paths:
+        - path: /
+          pathType: Prefix
+  # TLS enabled in production
+  tls:
+    - secretName: traffic-prediction-tls
+      hosts:
+        - traffic-prediction.production.local
+
+hpa:
+  minReplicas: 3
+  maxReplicas: 12
+  targetCPUUtilizationPercentage: 60  # Scale out earlier in production
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: 2000m
+    memory: 2Gi
+
+env:
+  ENVIRONMENT: production
+  LOG_LEVEL: WARNING
+
+# Pod Disruption Budget is configured separately in templates/pdb.yaml

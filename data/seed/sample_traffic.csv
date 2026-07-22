@@ -1,0 +1,17 @@
+Timestamp,Location/Street,District,Latitude,Longitude,CurrentSpeed,FreeFlowSpeed,Confidence
+2026-07-21 08:00:00,Nguyen Hue Street,District 1,10.7769,106.7009,25.0,45.0,0.95
+2026-07-21 08:00:00,Le Loi Avenue,District 1,10.7738,106.6983,20.0,40.0,0.92
+2026-07-21 08:00:00,Pasteur Street,District 3,10.7812,106.6945,30.0,45.0,0.98
+2026-07-21 08:00:00,Nam Ky Khoi Nghia,District 3,10.7845,106.6912,18.0,45.0,0.94
+2026-07-21 08:00:00,Vo Van Kiet Highway,District 5,10.7531,106.6698,55.0,60.0,0.96
+2026-07-21 08:00:00,Nguyen Van Linh Parkway,District 7,10.7302,106.7061,48.0,50.0,0.91
+2026-07-21 08:00:00,Cach Mang Thang 8,District 10,10.7789,106.6785,15.0,40.0,0.93
+2026-07-21 08:00:00,Pham Van Dong Boulevard,Binh Thanh,10.8172,106.6988,40.0,50.0,0.97
+2026-07-21 17:30:00,Nguyen Hue Street,District 1,10.7769,106.7009,12.0,45.0,0.96
+2026-07-21 17:30:00,Le Loi Avenue,District 1,10.7738,106.6983,10.0,40.0,0.95
+2026-07-21 17:30:00,Pasteur Street,District 3,10.7812,106.6945,15.0,45.0,0.93
+2026-07-21 17:30:00,Nam Ky Khoi Nghia,District 3,10.7845,106.6912,14.0,45.0,0.92
+2026-07-21 17:30:00,Vo Van Kiet Highway,District 5,10.7531,106.6698,35.0,60.0,0.94
+2026-07-21 17:30:00,Nguyen Van Linh Parkway,District 7,10.7302,106.7061,42.0,50.0,0.96
+2026-07-21 17:30:00,Cach Mang Thang 8,District 10,10.7789,106.6785,8.0,40.0,0.90
+2026-07-21 17:30:00,Pham Van Dong Boulevard,Binh Thanh,10.8172,106.6988,30.0,50.0,0.95

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ModelManifestSchema",
+  "type": "object",
+  "description": "JSON Schema kiểm tra tính hợp lệ của Model Manifest Metadata cho PySpark và Rust Inference Engine",
+  "required": [
+    "model_version",
+    "training_run_id",
+    "spark_model_checksum",
+    "inference_model_checksum",
+    "feature_contract_version",
+    "model_format",
+    "created_at",
+    "metrics",
+    "minimum_runtime_version"
+  ],
+  "properties": {
+    "model_version": {
+      "type": "string",
+      "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "example": "v1.0.0"
+    },
+    "training_run_id": {
+      "type": "string",
+      "description": "MLflow Run ID hoặc UUID đợt huấn luyện",
+      "example": "run_20260721_193000"
+    },
+    "spark_model_checksum": {
+      "type": "string",
+      "description": "SHA-256 Checksum của PySpark PipelineModel artifact",
+      "example": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "inference_model_checksum": {
+      "type": "string",
+      "description": "SHA-256 Checksum của Rust Native Tree / ONNX Engine artifact",
+      "example": "a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e"
+    },
+    "feature_contract_version": {
+      "type": "string",
+      "example": "1.0.0"
+    },
+    "model_format": {
+      "type": "string",
+      "enum": ["spark_pipeline", "rust_native_gbt", "onnx"],
+      "example": "rust_native_gbt"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2026-07-21T20:30:00Z"
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["rmse", "mae", "r2"],
+      "properties": {
+        "rmse": { "type": "number", "minimum": 0.0 },
+        "mae": { "type": "number", "minimum": 0.0 },
+        "r2": { "type": "number", "minimum": -1.0, "maximum": 1.0 }
+      }
+    },
+    "minimum_runtime_version": {
+      "type": "string",
+      "example": "1.0.0"
+    }
+  }
+}

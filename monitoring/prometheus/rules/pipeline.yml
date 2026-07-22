@@ -1,0 +1,18 @@
+groups:
+  - name: pipeline_alerts
+    rules:
+      - alert: TomTomAPIErrorSpike
+        expr: rate(tomtom_request_errors_total[5m]) > 5
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "TomTom API request error rate elevated (> 5 errors/min)"
+
+      - alert: DataStalenessAlert
+        expr: model_data_age_seconds > 3600
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Traffic data staleness exceeds 1 hour"

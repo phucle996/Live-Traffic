@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ho Chi Minh City Boundary",
+        "code": "HCM",
+        "area_km2": 2095
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [106.3500, 10.3800],
+            [107.0300, 10.3800],
+            [107.0300, 11.1600],
+            [106.3500, 11.1600],
+            [106.3500, 10.3800]
+          ]
+        ]
+      }
+    }
+  ]
+}

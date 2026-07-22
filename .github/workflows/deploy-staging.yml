@@ -1,0 +1,58 @@
+# ==============================================================================
+# Deploy to Staging Workflow (.github/workflows/deploy-staging.yml)
+# Helm deploy → Smoke Test Gate
+# RULE: Smoke test failure BLOCKS production promotion
+# ==============================================================================
+
+name: Deploy to Staging
+
+on:
+  workflow_run:
+    workflows: ["Build & Push Docker Images"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy-staging:
+    name: Helm Deploy → Staging Namespace
+    runs-on: ubuntu-latest
+    # Only deploy if the build workflow succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment: staging
+    timeout-minutes: 20
+
+    env:
+      IMAGE_TAG: ${{ github.sha }}
+      REGISTRY: ghcr.io/${{ github.repository_owner }}
+      NAMESPACE: staging
+
+    steps:
+      # Step 1: Checkout code for Helm chart access
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Configure kubectl credentials from GitHub secret
+      - name: Configure kubectl
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG_STAGING }}
+
+      # Step 3: Helm upgrade --install to staging namespace
+      # Uses immutable Git SHA image tag — NEVER :latest
+      - name: Helm deploy to staging
+        run: |
+          helm upgrade --install traffic-prediction-staging deploy/helm/ \
+            --namespace "$NAMESPACE" \
+            --create-namespace \
+            --values deploy/helm/values-staging.yaml \
+            --set image.tag="${IMAGE_TAG}" \
+            --set image.registry="${REGISTRY}" \
+            --wait \
+            --timeout 5m
+
+      # Step 4: Smoke test — exits 1 on failure, blocking production deploy
+      - name: Run staging smoke test
+        env:
+          STAGING_API_URL: ${{ secrets.STAGING_API_URL }}
+        run: bash scripts/smoke_test.sh "$STAGING_API_URL"

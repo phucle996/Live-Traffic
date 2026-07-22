@@ -1,0 +1,14 @@
+# ==============================================================================
+# Traffic Contract Crate Manifest (crates/traffic-contract/Cargo.toml)
+# Data Contract Specifications & Serde Models for Python/Go/Rust Interop
+# ==============================================================================
+
+[package]
+name = "traffic-contract"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }

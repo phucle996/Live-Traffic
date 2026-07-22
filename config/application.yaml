@@ -1,0 +1,39 @@
+# ==============================================================================
+# Application Configuration Defaults (YAML)
+# Single Source of Static Defaults overlaid by .env Environment Variables
+# ==============================================================================
+
+project:
+  name: "traffic-prediction-lab5" # Name of the project application
+  version: "1.0.0"                 # Application semantic version
+
+ingestion:
+  mode: "seed"                      # Default ingestion mode ('seed' or 'api')
+  interval_seconds: 120             # Time interval between API crawl cycles
+  max_retries: 5                    # Maximum retry attempts for HTTP network calls
+  retry_delay_seconds: 10           # Delay between retry attempts in seconds
+
+data:
+  locations_file: "data/locations/data_converted.csv" # Path to target locations file
+  seed_folder: "data/seed"                             # Folder containing offline seed CSVs
+  raw_hdfs_path: "/traffic_project/raw"               # HDFS path for raw ingested data
+  processed_hdfs_path: "/traffic_project/processed"   # HDFS path for cleaned parquet data
+
+model:
+  target: "CurrentSpeed"            # Target variable to predict
+  features:                         # Feature vector columns used in GBT model
+    - "Latitude"
+    - "Longitude"
+    - "TimeInMinutes"
+    - "DayOfWeek"
+    - "Weekend"
+  hyperparameters:                  # Default MLlib GBTRegressor parameters
+    max_iter: 100
+    max_depth: 5
+    seed: 42
+
+spark:
+  app_name: "traffic-prediction"    # Spark application name
+  master: "spark://spark-master:7077" # Spark Master URL
+  driver_memory: "2g"               # Spark Driver Memory allocation
+  executor_memory: "2g"             # Spark Executor Memory allocation

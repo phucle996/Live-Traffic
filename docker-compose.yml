@@ -1,0 +1,318 @@
+# ==============================================================================
+# Docker Compose Orchestration Specification (docker-compose.yml)
+# Hadoop HDFS (NameNode/DataNode), Apache Spark (Master/Worker), Apache Kafka & ZooKeeper, & Streamlit Dashboard
+# ==============================================================================
+
+version: '3.8'
+
+# Custom bridge network isolating traffic prediction system containers
+networks:
+  traffic-net:
+    driver: bridge
+
+# Persistent Docker volume definitions for Hadoop HDFS & Kafka durability across container restarts
+volumes:
+  namenode_data:
+    driver: local
+  datanode_data:
+    driver: local
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
+  postgres_data:
+    driver: local
+
+services:
+  # ============================================================================
+  # 1. HDFS NameNode Service
+  # ============================================================================
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: namenode
+    restart: always
+    ports:
+      - "9000:9000"   # HDFS RPC Service Port
+      - "9870:9870"   # NameNode Web UI Dashboard Port
+    environment:
+      - CLUSTER_NAME=traffic_cluster
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    volumes:
+      - namenode_data:/hadoop/dfs/name
+    networks:
+      - traffic-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9870/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ============================================================================
+  # 2. HDFS DataNode Service
+  # ============================================================================
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    restart: always
+    ports:
+      - "9864:9864"   # DataNode Web UI Port
+    environment:
+      - SERVICE_PRECONDITION=namenode:9870
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    volumes:
+      - datanode_data:/hadoop/dfs/data
+    networks:
+      - traffic-net
+    depends_on:
+      namenode:
+        condition: service_healthy
+
+  # ============================================================================
+  # 3. Apache Spark Master Service
+  # ============================================================================
+  spark-master:
+    image: apache/spark:3.5.0
+    container_name: spark-master
+    restart: always
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
+    ports:
+      - "7077:7077"   # Spark Master RPC Connection Port
+      - "8080:8080"   # Spark Master Web UI Dashboard Port
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - ./:/app
+    networks:
+      - traffic-net
+
+  # ============================================================================
+  # 4. Apache Spark Worker Service
+  # ============================================================================
+  spark-worker:
+    image: apache/spark:3.5.0
+    container_name: spark-worker
+    restart: always
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
+    ports:
+      - "8081:8081"   # Spark Worker Web UI Port
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=2
+    volumes:
+      - ./:/app
+    networks:
+      - traffic-net
+    depends_on:
+      - spark-master
+
+
+  # ============================================================================
+  # 5. ZooKeeper Coordination Service for Kafka
+  # ============================================================================
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"   # ZooKeeper Client Port
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zookeeper_data:/var/lib/zookeeper/data
+    networks:
+      - traffic-net
+
+  # ============================================================================
+  # 6. Apache Kafka Message Broker Service
+  # ============================================================================
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    restart: always
+    ports:
+      - "9092:9092"     # Container internal/bridge port
+      - "29092:29092"   # External host port
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    networks:
+      - traffic-net
+    depends_on:
+      - zookeeper
+
+  # ============================================================================
+  # 7. HDFS Initialization Service (Creates /traffic_project folders)
+  # ============================================================================
+  hdfs-init:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    container_name: hdfs-init
+    volumes:
+      - ./scripts:/scripts
+    networks:
+      - traffic-net
+    environment:
+      - HDFS_URI=hdfs://namenode:9000
+    entrypoint: ["/bin/bash", "/scripts/init_hdfs.sh"]
+    depends_on:
+      namenode:
+        condition: service_healthy
+
+  # ============================================================================
+  # 8. High-Performance Go Production Web Dashboard (Phase H8)
+  # Zero-Python, Zero-Spark Leaflet.js Interactive Web Dashboard
+  # ============================================================================
+  web-dashboard:
+    build:
+      context: ./services/go-traffic
+      dockerfile: Dockerfile.web
+    container_name: web-dashboard
+    restart: always
+    ports:
+      - "8501:8501"   # Expose UI Port 8501 cho phép xem Web Dashboard trực tiếp hoặc qua NGINX (Port 80)
+    environment:
+      - PORT=8501
+      - GO_LIVE_API_URL=http://go-live-api:8084
+      - RUST_PREDICTION_API_URL=http://rust-inference-api:8080
+    volumes:
+      - ./services/go-traffic/web:/app/web:ro
+    networks:
+      - traffic-net
+    depends_on:
+      - go-live-api
+      - rust-inference-api
+
+
+  # ============================================================================
+  # 9. Cloud-Native Rust Inference API Service (Phase H4)
+  # Zero-Python, Zero-Java, Zero-Spark High-Performance Serving
+  # ============================================================================
+  rust-inference-api:
+    build:
+      context: ./services/rust-inference
+      dockerfile: Dockerfile
+    container_name: rust-inference-api
+    restart: always
+    # Bỏ publish port ra host (không cho truy cập trực tiếp port 8090)
+    # Bảo mật mạng nội bộ Docker traffic-net
+    environment:
+      - PORT=8080
+      - RUST_LOG=info
+    volumes:
+      - ./artifacts:/app/artifacts:ro
+    networks:
+      - traffic-net
+
+  # ============================================================================
+  # 10. Cloud-Native Go TomTom Traffic Collector Service (Phase H5)
+  # Low-Memory, High-Concurrency Periodic Crawler & Rate Limiter
+  # ============================================================================
+  go-traffic-collector:
+    build:
+      context: ./services/go-traffic
+      dockerfile: Dockerfile
+    container_name: go-traffic-collector
+    restart: always
+    # Giao tiếp nội bộ qua mạng traffic-net
+    environment:
+      - PORT=8083
+      - INGESTION_MODE=auto
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    volumes:
+      - ./data/seed:/app/data/seed:ro
+    networks:
+      - traffic-net
+    depends_on:
+      kafka:
+        condition: service_started
+
+  # ============================================================================
+  # 11. Cloud-Native Go Live Traffic API Service (Phase H6)
+  # Ultra-Low Latency Serving (<1ms) from Latest State Store
+  # ============================================================================
+  go-live-api:
+    build:
+      context: ./services/go-traffic
+      dockerfile: Dockerfile.live-api
+    container_name: go-live-api
+    restart: always
+    # Bỏ publish port ra host (không cho truy cập trực tiếp port 8084)
+    # Toàn bộ request đi qua Ingress Gateway NGINX
+    environment:
+      - PORT=8084
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    volumes:
+      # Mount danh mục 245+ tuyến đường giao thông toàn quốc vào container
+      - ./services/go-traffic/data/seed:/app/data/seed:ro
+    networks:
+      - traffic-net
+    depends_on:
+      kafka:
+        condition: service_started
+
+
+  # ============================================================================
+  # 12. NGINX Ingress Router Gateway Service (Phase H10)
+  # High-Availability Unified Reverse Proxy Router (Port 80)
+  # Dynamic Edge Ingress Gateway - Cổng duy nhất tiếp nhận request từ Host
+  # ============================================================================
+  nginx-gateway:
+    image: nginx:alpine
+    container_name: nginx-gateway
+    restart: always
+    ports:
+      - "80:80"   # Ingress Gateway Port 80 công khai duy nhất
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - traffic-net
+    depends_on:
+      - rust-inference-api
+      - go-live-api
+      - web-dashboard
+
+
+  # ============================================================================
+  # 13. PostgreSQL 15 + PostGIS 3.3 Spatial Database Service (Phase ROAD-1)
+  # Persistent Spatial Catalog, Road Segments Geometry & Mapping Cache
+  # ============================================================================
+  postgres:
+    image: postgis/postgis:15-3.3
+    container_name: postgres-postgis
+    restart: always
+    ports:
+      - "5432:5432"   # PostgreSQL Standard Port
+    environment:
+      - POSTGRES_DB=traffic_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d:ro  # Tự động nạp migrations (001, 002, 003) khi khởi tạo
+    networks:
+      - traffic-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d traffic_db || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+
+
+
+

@@ -1,0 +1,14 @@
+{
+  "model_version": "v1.0.0",
+  "format": "rust_native_gbt",
+  "checksum_sha256": "071585f8444659df985caefdfcf79ce4a37f2412cfa13c4be1c7259e99d32635",
+  "num_trees": 100,
+  "feature_names": [
+    "Latitude",
+    "Longitude",
+    "TimeInMinutes",
+    "DayOfWeek",
+    "Weekend"
+  ],
+  "created_at": "2026-07-21T20:46:00Z"
+}

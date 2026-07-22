@@ -1,0 +1,35 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Ingested Rows Total",
+      "type": "stat",
+      "targets": [{ "expr": "ingested_rows_total", "legendFormat": "Rows" }]
+    },
+    {
+      "id": 2,
+      "title": "API Prediction Latency (p95)",
+      "type": "timeseries",
+      "targets": [{ "expr": "histogram_quantile(0.95, sum(rate(prediction_latency_seconds_bucket[5m])) by (le))", "legendFormat": "p95 Latency" }]
+    },
+    {
+      "id": 3,
+      "title": "Active Model RMSE",
+      "type": "gauge",
+      "targets": [{ "expr": "model_rmse", "legendFormat": "RMSE (km/h)" }]
+    }
+  ],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["traffic", "prediction", "production"],
+  "time": { "from": "now-6h", "to": "now" },
+  "title": "Urban Traffic Prediction System Dashboard",
+  "version": 1
+}

@@ -1,0 +1,22 @@
+# ==============================================================================
+# Endpoint Permissions Mapping Contract (contracts/security/endpoint_permissions.yaml)
+# Maps HTTP Service routes directly to authorized JWT scopes
+# ==============================================================================
+permissions:
+  # Go Live Traffic API Endpoint Permissions
+  "GET /v1/traffic/live":
+    scopes: ["traffic:read"]
+  "GET /v1/traffic/live/":
+    scopes: ["traffic:read"]
+  "GET /v1/source/status":
+    scopes: ["traffic:read"]
+
+  # Rust Inference REST API Endpoint Permissions
+  "POST /v1/predictions":
+    scopes: ["prediction:execute"]
+  "POST /v1/predictions/batch":
+    scopes: ["prediction:execute"]
+  "GET /v1/model":
+    scopes: ["model:read"]
+  "POST /v1/model/reload":
+    scopes: ["model:reload"]

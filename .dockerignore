@@ -1,0 +1,23 @@
+# ==============================================================================
+# Docker Ignore File (.dockerignore)
+# Excludes unnecessary files and secrets from Docker image build context
+# ==============================================================================
+
+.git
+.gitignore
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+artifacts/models/*
+artifacts/predictions/*
+artifacts/metrics/*
+artifacts/reports/*
+data/output/*

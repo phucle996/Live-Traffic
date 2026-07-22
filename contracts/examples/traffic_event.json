@@ -1,0 +1,16 @@
+{
+  "event_id": "evt-550e8400-e29b-41d4-a716-446655440000",
+  "event_time": "2026-07-21T20:30:00Z",
+  "ingested_at": "2026-07-21T20:30:01Z",
+  "location_id": "loc-nam-ky-khoi-nghia",
+  "location_name": "Nam Kỳ Khởi Nghĩa",
+  "district": "Quận 3",
+  "latitude": 10.778,
+  "longitude": 106.695,
+  "current_speed": 22.5,
+  "free_flow_speed": 45.0,
+  "confidence": 0.95,
+  "source": "tomtom_live",
+  "batch_id": "batch-20260721-001",
+  "schema_version": "v1.0.0"
+}

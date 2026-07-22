@@ -1,0 +1,17 @@
+# ==============================================================================
+# Traffic ONNX Engine Crate Manifest (crates/traffic-onnx-engine/Cargo.toml)
+# ONNX Runtime Model Runner for Batch Predictions
+# ==============================================================================
+
+[package]
+name = "traffic-onnx-engine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+rayon = { workspace = true }
+traffic-contract = { path = "../traffic-contract" }
+traffic-tree-engine = { path = "../traffic-tree-engine" }

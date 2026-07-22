@@ -1,0 +1,22 @@
+# ==============================================================================
+# Polling Policy Specification (config/coverage/polling_policy.yaml)
+# Phase HERE-3 — Khoảng thời gian thu thập dữ liệu theo mức ưu tiên Priority
+# Các thông số có thể cấu hình linh hoạt mà không cần rebuild binary
+# ==============================================================================
+policies:
+  priority_1:
+    description: "Khu vực trung tâm & giao lộ huyết mạch (Quận 1, Hàng Xanh, Sân bay)"
+    interval_seconds: 180     # Polling mỗi 3 phút
+    lease_ttl_seconds: 120    # Lock lease giữ trong 2 phút
+  priority_2:
+    description: "Trục đường chính & cửa ngõ liên quận (Xa lộ Hà Nội, Võ Văn Kiệt)"
+    interval_seconds: 450     # Polling mỗi 7.5 phút
+    lease_ttl_seconds: 300    # Lock lease giữ trong 5 phút
+  priority_3:
+    description: "Khu vực ngoại thành & mật độ giao thông thấp"
+    interval_seconds: 900     # Polling mỗi 15 phút
+    lease_ttl_seconds: 600    # Lock lease giữ trong 10 phút
+
+limits:
+  max_concurrent_cells: 5     # Tối đa số cell crawl song song để tránh spam provider
+  lease_cleanup_seconds: 60   # Chu kỳ dọn dẹp lease quá hạn

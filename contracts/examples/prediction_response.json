@@ -1,0 +1,10 @@
+{
+  "street_name": "Nam Kỳ Khởi Nghĩa",
+  "hour": 17,
+  "is_weekend": false,
+  "predicted_speed_kmh": 22.5,
+  "congestion_level": "ĐÔNG ĐÚC",
+  "model_version": "v1.0.0",
+  "data_source": "lab_offline",
+  "prediction_time": "2026-07-21T20:30:00Z"
+}

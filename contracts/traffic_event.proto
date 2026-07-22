@@ -1,0 +1,53 @@
+// ==============================================================================
+// Traffic Event Contract Specification V2 (contracts/traffic_event.proto)
+// Phase HERE-5 — Protocol Buffers Schema V2 cho Traffic Streaming Pipeline
+// ==============================================================================
+
+syntax = "proto3";
+
+package traffic.v2;
+
+option go_package = "go-traffic/internal/contract/v2;contractv2";
+
+// TrafficEventV2 đại diện cho sự kiện giao thông đã được chuẩn hóa V2
+message TrafficEventV2 {
+  // Metadata định danh sự kiện
+  string event_id = 1;              // Unique SHA-256 event ID
+  string schema_version = 2;        // "v2.0.0"
+
+  // Metadata nhà cung cấp dữ liệu (Provider Traceability)
+  string provider = 3;              // "here" | "tomtom" | "offline"
+  string provider_request_id = 4;   // Header Tracking ID từ response
+  string provider_segment_id = 5;   // Segment ID gốc từ provider
+  string provider_observed_at = 6;  // ISO-8601 timestamp từ provider
+
+  // Spatial Matching & Road Catalog Integration
+  string catalog_version = 7;       // "v2.0"
+  string segment_id = 8;            // UUID segment ID trong road catalog nội bộ
+  double matching_score = 9;        // Match score từ 0.0 đến 1.0
+
+  // Thời gian & Batch ID
+  string event_time = 10;           // ISO-8601 event timestamp
+  string ingested_at = 11;          // ISO-8601 ingestion timestamp
+  string batch_id = 12;             // Unique batch ID
+  string cell_id = 13;              // Cell ID ô lưới
+
+  // Chỉ số giao thông thời gian thực
+  double current_speed_kph = 14;              // Vận tốc hiện tại (km/h)
+  double free_flow_speed_kph = 15;           // Vận tốc tự do (km/h)
+  double travel_time_seconds = 16;           // Thời gian di chuyển (giây)
+  double free_flow_travel_time_seconds = 17; // Thời gian di chuyển tự do (giây)
+  double jam_factor = 18;                    // Chỉ số ùn tắc 0.0 - 10.0 (-1 nếu N/A)
+  double confidence = 19;                    // Độ tin cậy 0.0 - 1.0
+  bool road_closed = 20;                     // Cờ báo đóng đường
+
+  // Tọa độ địa lý
+  double latitude = 21;
+  double longitude = 22;
+  string geometry_reference = 23;            // WKT hoặc GeoJSON shape
+
+  // Trạng thái Fallback
+  string source_mode = 24;          // "live" | "fallback" | "seed"
+  bool fallback_used = 25;          // True nếu đã chuyển đổi sang fallback provider
+  string fallback_reason = 26;      // Lý do chuyển fallback (e.g. "Primary 'here' timeout")
+}

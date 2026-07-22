@@ -1,0 +1,26 @@
+# ==============================================================================
+# Staging Profile Configuration (config/staging.yaml)
+# ==============================================================================
+
+environment: staging
+debug: false
+
+logging:
+  level: INFO
+  format: json
+
+security:
+  enforce_https: true
+  secret_provider: docker_secrets
+  auth_required: true
+  rate_limit_enabled: true
+  requests_per_minute: 120
+
+hdfs:
+  uri: hdfs://namenode:9000
+  raw_path: /traffic_project/raw
+  processed_path: /traffic_project/processed
+
+spark:
+  master: spark://spark-master:7077
+  app_name: TrafficFlowETL_Staging

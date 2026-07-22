@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- Google Maps Dark Theme Web Application (services/go-traffic/web/index.html) -->
+<html lang="vi">
+<head>
+    <!-- 1. Cấu hình bảng mã UTF-8 & Chế độ hiển thị Responsive Viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Bản Đồ & Dự Đoán Giao Thông TP.HCM - Google Maps Dark Mode</title>
+
+    <!-- 2. Nhập Leaflet.js CSS phục vụ hiển thị bản đồ tương tác -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- 3. Nhập Google Fonts Inter & Outfit nâng cao thẩm mỹ typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- 4. Nhập Custom Glassmorphic Dark Theme Style -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- 5. Tải Thư viện React 18 UMD & Babel Standalone cho React SPA -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <!-- 6. Container Root duy nhất nơi React 18 SPA sẽ Mount vào DOM -->
+    <div id="root"></div>
+
+    <!-- 7. Tải Thư viện Leaflet.js Map Engine -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- 8. Nạp Engine JavaScript React SPA chính (Babel Transpiled) -->
+    <script type="text/babel" src="/js/app.js"></script>
+</body>
+</html>

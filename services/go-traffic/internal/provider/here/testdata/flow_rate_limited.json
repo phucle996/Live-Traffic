@@ -1,0 +1,5 @@
+{
+  "error": "Too Many Requests",
+  "error_description": "Rate limit exceeded. Quota threshold reached for this API key.",
+  "status": 429
+}

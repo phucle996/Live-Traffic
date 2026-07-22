@@ -1,0 +1,14 @@
+{
+  "model_version": "v1.0.0",
+  "format": "onnx",
+  "checksum_sha256": "82ee4000621d923a5ee19c845bf6e7f281b36fc88035dcf3a1412405124773e7",
+  "num_features": 5,
+  "feature_names": [
+    "Latitude",
+    "Longitude",
+    "TimeInMinutes",
+    "DayOfWeek",
+    "Weekend"
+  ],
+  "created_at": "2026-07-21T20:46:00Z"
+}

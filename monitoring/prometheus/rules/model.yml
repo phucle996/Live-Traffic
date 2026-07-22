@@ -1,0 +1,10 @@
+groups:
+  - name: model_alerts
+    rules:
+      - alert: ModelRMSEDegradation
+        expr: model_rmse > 12.0
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Active traffic prediction model RMSE exceeds threshold (12.0 km/h)"

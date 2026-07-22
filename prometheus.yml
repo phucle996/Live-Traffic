@@ -1,0 +1,34 @@
+# ==============================================================================
+# Prometheus Scrape Configuration (prometheus.yml)
+# Cấu hình Prometheus thu thập metrics từ 4 microservices (Go, Rust, Nginx, Python)
+# ==============================================================================
+
+global:
+  scrape_interval: 15s      # Tần suất scrape metrics mặc định (15 giây)
+  evaluation_interval: 15s  # Tần suất đánh giá Alert Rules
+
+scrape_configs:
+  # 1. Scrape Go Traffic Collector Metrics (Port 8083)
+  - job_name: "go-traffic-collector"
+    static_configs:
+      - targets: ["go-traffic-collector:8083"]
+    metrics_path: /metrics
+
+  # 2. Scrape Go Live Traffic API Metrics (Port 8084)
+  - job_name: "go-live-api"
+    static_configs:
+      - targets: ["go-live-api:8084"]
+    metrics_path: /metrics
+
+  # 3. Scrape Rust Inference Engine Metrics (Port 8090)
+  - job_name: "rust-inference-api"
+    static_configs:
+      - targets: ["rust-inference-api:8080"]
+    metrics_path: /metrics
+
+  # 4. Scrape Web Dashboard Metrics (Port 8501)
+  - job_name: "web-dashboard"
+    static_configs:
+      - targets: ["web-dashboard:8501"]
+    metrics_path: /metrics
+    honor_labels: true

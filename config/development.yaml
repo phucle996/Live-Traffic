@@ -1,0 +1,25 @@
+# ==============================================================================
+# Development Profile Configuration (config/development.yaml)
+# ==============================================================================
+
+environment: development
+debug: true
+
+logging:
+  level: DEBUG
+  format: text
+
+security:
+  enforce_https: false
+  secret_provider: env
+  auth_required: false
+  rate_limit_enabled: false
+
+hdfs:
+  uri: hdfs://namenode:9000
+  raw_path: /traffic_project/raw
+  processed_path: /traffic_project/processed
+
+spark:
+  master: spark://spark-master:7077
+  app_name: TrafficFlowETL_Dev

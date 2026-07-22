@@ -1,0 +1,13 @@
+# ==============================================================================
+# Roles Definition Contract (contracts/security/roles.yaml)
+# ==============================================================================
+roles:
+  admin:
+    description: "System Administrator. Full access to model management, secrets, and ETL pipeline controls."
+    inherits: ["operator", "viewer"]
+  operator:
+    description: "System Operator. Can run ingestion pipelines, trigger ETLs, and manage operational dashboard data."
+    inherits: ["viewer"]
+  viewer:
+    description: "ReadOnly Viewer. Can access dashboards and run standard traffic prediction queries."
+    inherits: []

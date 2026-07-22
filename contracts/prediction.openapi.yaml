@@ -1,0 +1,146 @@
+# ==============================================================================
+# OpenAPI 3.0.3 Specification (contracts/prediction.openapi.yaml)
+# External REST HTTP API Contract for Traffic Prediction & Health Check Services
+# Version: 1.0.0
+# ==============================================================================
+
+openapi: 3.0.3
+info:
+  title: Traffic Speed Prediction & Live Traffic Serving API
+  description: >
+    Hợp đồng REST API chuẩn OpenAPI 3.0 định nghĩa các endpoint dự đoán tốc độ giao thông 
+    và phân loại mức độ ùn tắc thời gian thực (JSON over HTTP).
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8501
+    description: Local Development / Streamlit API Server
+  - url: http://api.traffic.staging.internal
+    description: Staging Kubernetes Ingress Environment
+  - url: http://api.traffic.production.internal
+    description: Production Kubernetes High-Availability Cluster
+
+paths:
+  /:
+    get:
+      summary: Root Health Check & API Status
+      operationId: getRootStatus
+      responses:
+        '200':
+          description: API hoạt động bình thường
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "online"
+                  service:
+                    type: string
+                    example: "traffic-prediction-api"
+                  version:
+                    type: string
+                    example: "v1.0.0"
+
+  /health/live:
+    get:
+      summary: Kubernetes Liveness Probe
+      operationId: getLiveness
+      responses:
+        '200':
+          description: Liveness Probe OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "alive"
+
+  /v1/predict:
+    post:
+      summary: Dự đoán tốc độ giao thông và mức độ ùn tắc
+      operationId: predictTraffic
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PredictionRequest'
+      responses:
+        '200':
+          description: Kết quả dự đoán giao thông thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionResponse'
+        '400':
+          description: Dữ liệu yêu cầu không hợp lệ
+        '500':
+          description: Lỗi máy chủ nội bộ
+
+components:
+  schemas:
+    PredictionRequest:
+      type: object
+      required:
+        - street_name
+        - hour
+        - is_weekend
+      properties:
+        street_name:
+          type: string
+          description: Tên tuyến đường / vị trí giao thông
+          example: "Nam Kỳ Khởi Nghĩa"
+        hour:
+          type: integer
+          minimum: 0
+          maximum: 23
+          description: Giờ trong ngày (0 đến 23)
+          example: 17
+        is_weekend:
+          type: boolean
+          description: Cờ ngày cuối tuần (true nếu là Thứ 7 / Chủ Nhật, false nếu Ngày thường)
+          example: false
+
+    PredictionResponse:
+      type: object
+      required:
+        - street_name
+        - hour
+        - is_weekend
+        - predicted_speed_kmh
+        - congestion_level
+        - model_version
+        - prediction_time
+      properties:
+        street_name:
+          type: string
+          example: "Nam Kỳ Khởi Nghĩa"
+        hour:
+          type: integer
+          example: 17
+        is_weekend:
+          type: boolean
+          example: false
+        predicted_speed_kmh:
+          type: number
+          format: double
+          description: Tốc độ dự đoán (km/h) kiểu float64
+          example: 22.5
+        congestion_level:
+          type: string
+          description: Mức độ ùn tắc giao thông ("THÔNG THOÁNG", "ĐÔNG ĐÚC", "TẮC NGHẼN NGHIÊM TRỌNG")
+          example: "ĐÔNG ĐÚC"
+        model_version:
+          type: string
+          example: "v1.0.0"
+        data_source:
+          type: string
+          example: "lab_offline"
+        prediction_time:
+          type: string
+          format: date-time
+          example: "2026-07-21T20:30:00Z"

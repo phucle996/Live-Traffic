@@ -1,0 +1,50 @@
+# ==============================================================================
+# Ingress Resource (deploy/kubernetes/ingress.yaml)
+# TLS-terminated nginx ingress — no hardcoded IP addresses
+# Routes external traffic to API and Dashboard services by path
+# ==============================================================================
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traffic-prediction-ingress
+  namespace: production
+  annotations:
+    # Force HTTPS redirect — no plaintext HTTP in production
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    # Increase proxy timeouts for ML inference latency
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "60"
+    # Rate limiting: 100 requests per second per client IP
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+spec:
+  ingressClassName: nginx
+  tls:
+    # TLS cert stored in Kubernetes Secret — not hardcoded
+    - secretName: traffic-prediction-tls
+      hosts:
+        - api.traffic-prediction.local
+        - dashboard.traffic-prediction.local
+  rules:
+    # Route /api/* to prediction API service
+    - host: api.traffic-prediction.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traffic-prediction-api
+                port:
+                  name: http
+    # Route dashboard traffic to Streamlit service
+    - host: dashboard.traffic-prediction.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traffic-dashboard
+                port:
+                  name: streamlit

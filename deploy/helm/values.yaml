@@ -1,0 +1,66 @@
+# ==============================================================================
+# Helm Default Values (deploy/helm/values.yaml)
+# All environment-specific overrides go in values-staging.yaml / values-production.yaml
+# ==============================================================================
+
+# Docker image configuration
+image:
+  registry: ghcr.io/traffic-prediction
+  repository: traffic-prediction-api
+  # tag is always overridden at deploy time with Git SHA — never :latest
+  tag: "latest-override-required"
+  pullPolicy: IfNotPresent
+
+# Number of prediction API replicas
+replicaCount: 2
+
+# Kubernetes Service configuration
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+
+# Ingress configuration
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: traffic-prediction.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+# Horizontal Pod Autoscaler
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 8
+  targetCPUUtilizationPercentage: 70
+
+# Resource requests and limits for prediction API pods
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
+# Liveness and readiness probe configuration
+probes:
+  liveness:
+    path: /health/live
+    initialDelaySeconds: 15
+    periodSeconds: 20
+  readiness:
+    path: /health/ready
+    initialDelaySeconds: 10
+    periodSeconds: 10
+
+# Environment variables injected into pods
+env:
+  ENVIRONMENT: development
+  LOG_LEVEL: INFO

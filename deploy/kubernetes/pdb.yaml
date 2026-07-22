@@ -1,0 +1,33 @@
+# ==============================================================================
+# PodDisruptionBudget (deploy/kubernetes/pdb.yaml)
+# CRITICAL: Ensures at least 2 API pods remain available during:
+#   - Node drains (kubectl drain)
+#   - Rolling updates
+#   - Voluntary disruptions (maintenance)
+# Prevents: cluster operator from accidentally taking system below minimum capacity
+# ==============================================================================
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: traffic-prediction-api-pdb
+  namespace: production
+spec:
+  # At minimum 2 pods must be Available at all times
+  # With 3 baseline replicas → only 1 pod can be voluntarily disrupted at once
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: traffic-prediction-api
+---
+# PDB for dashboard — at least 1 must always be available
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: traffic-dashboard-pdb
+  namespace: production
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: traffic-dashboard

@@ -1,0 +1,314 @@
+[
+  {
+    "segment_id": "f6fec4cf-aab1-5a57-bd9e-ad8a7977d3f3",
+    "catalog_version": "v2.0",
+    "road_name": "Chợ Bến Thành — Nguyễn An Ninh",
+    "road_class": "primary",
+    "direction": "east",
+    "length_m": 218.47,
+    "bearing": 90.0,
+    "lanes": 3,
+    "speed_limit_kph": 50.0,
+    "district": "Quận 1",
+    "centroid_lat": 10.7727,
+    "centroid_lon": 106.698,
+    "geometry_hash": "1eb6c332cc465f2d",
+    "coordinates": [
+      [
+        106.697,
+        10.7727
+      ],
+      [
+        106.699,
+        10.7727
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "d64f8f48-e7a5-5183-808c-4deb6a7375e0",
+    "catalog_version": "v2.0",
+    "road_name": "Đường Nguyễn Huệ — Lê Lợi",
+    "road_class": "primary",
+    "direction": "north",
+    "length_m": 258.15,
+    "bearing": 30.52,
+    "lanes": 3,
+    "speed_limit_kph": 50.0,
+    "district": "Quận 1",
+    "centroid_lat": 10.774,
+    "centroid_lon": 106.7036,
+    "geometry_hash": "9b5a108c85691321",
+    "coordinates": [
+      [
+        106.703,
+        10.773
+      ],
+      [
+        106.7042,
+        10.775
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "5bcc3ee2-1fc4-577f-85f4-14bbd5545576",
+    "catalog_version": "v2.0",
+    "road_name": "Ngã tư Hàng Xanh — Điện Biên Phủ",
+    "road_class": "primary",
+    "direction": "east",
+    "length_m": 490.24,
+    "bearing": 63.02,
+    "lanes": 3,
+    "speed_limit_kph": 50.0,
+    "district": "Bình Thạnh",
+    "centroid_lat": 10.8014,
+    "centroid_lon": 106.7115,
+    "geometry_hash": "9b1bc9a398f43228",
+    "coordinates": [
+      [
+        106.7095,
+        10.8004
+      ],
+      [
+        106.7135,
+        10.8024
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "b4f406fd-478b-5663-8c8d-0c8aa4e2a925",
+    "catalog_version": "v2.0",
+    "road_name": "Đường Điện Biên Phủ — Đinh Bộ Lĩnh",
+    "road_class": "primary",
+    "direction": "east",
+    "length_m": 490.26,
+    "bearing": 63.02,
+    "lanes": 3,
+    "speed_limit_kph": 50.0,
+    "district": "Bình Thạnh",
+    "centroid_lat": 10.7887,
+    "centroid_lon": 106.6955,
+    "geometry_hash": "054e80a08c96a9da",
+    "coordinates": [
+      [
+        106.6935,
+        10.7877
+      ],
+      [
+        106.6975,
+        10.7897
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "ed92ffab-86ff-5e7d-bb42-7c142511386a",
+    "catalog_version": "v2.0",
+    "road_name": "Đại lộ Võ Văn Kiệt — Nguyễn Tri Phương",
+    "road_class": "trunk",
+    "direction": "east",
+    "length_m": 692.17,
+    "bearing": 71.26,
+    "lanes": 3,
+    "speed_limit_kph": 60.0,
+    "district": "Quận 5",
+    "centroid_lat": 10.7458,
+    "centroid_lon": 106.6533,
+    "geometry_hash": "0fe28b05e569be56",
+    "coordinates": [
+      [
+        106.6503,
+        10.7448
+      ],
+      [
+        106.6563,
+        10.7468
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "c2a907cb-8cb6-59a2-b0e0-7957811075d0",
+    "catalog_version": "v2.0",
+    "road_name": "Xa lộ Hà Nội — Cầu Sài Gòn",
+    "road_class": "motorway",
+    "direction": "east",
+    "length_m": 901.24,
+    "bearing": 75.71,
+    "lanes": 3,
+    "speed_limit_kph": 60.0,
+    "district": "TP. Thủ Đức",
+    "centroid_lat": 10.9493,
+    "centroid_lon": 106.872,
+    "geometry_hash": "cc846df91c95913c",
+    "coordinates": [
+      [
+        106.868,
+        10.9483
+      ],
+      [
+        106.876,
+        10.9503
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "866c2714-1e85-52e3-9b73-10b26996bfd8",
+    "catalog_version": "v2.0",
+    "road_name": "Ngã tư An Sương — QL22",
+    "road_class": "trunk",
+    "direction": "east",
+    "length_m": 691.97,
+    "bearing": 71.25,
+    "lanes": 3,
+    "speed_limit_kph": 60.0,
+    "district": "Quận 12",
+    "centroid_lat": 10.8432,
+    "centroid_lon": 106.6151,
+    "geometry_hash": "184b4ecd32058e51",
+    "coordinates": [
+      [
+        106.6121,
+        10.8422
+      ],
+      [
+        106.6181,
+        10.8442
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "bac3b247-78d8-5059-9d45-bd908a063ded",
+    "catalog_version": "v2.0",
+    "road_name": "Cầu Sài Gòn — Ung Văn Khiêm",
+    "road_class": "primary",
+    "direction": "east",
+    "length_m": 490.25,
+    "bearing": 63.02,
+    "lanes": 3,
+    "speed_limit_kph": 50.0,
+    "district": "Bình Thạnh",
+    "centroid_lat": 10.799,
+    "centroid_lon": 106.727,
+    "geometry_hash": "e83765841178a277",
+    "coordinates": [
+      [
+        106.725,
+        10.798
+      ],
+      [
+        106.729,
+        10.8
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "84e15cbc-a025-507c-95b7-efd39a0c80db",
+    "catalog_version": "v2.0",
+    "road_name": "Cách Mạng Tháng 8 — Dân Chủ",
+    "road_class": "secondary",
+    "direction": "east",
+    "length_m": 490.27,
+    "bearing": 63.02,
+    "lanes": 2,
+    "speed_limit_kph": 50.0,
+    "district": "Quận 3",
+    "centroid_lat": 10.779,
+    "centroid_lon": 106.6768,
+    "geometry_hash": "624770147a8f2a45",
+    "coordinates": [
+      [
+        106.6748,
+        10.778
+      ],
+      [
+        106.6788,
+        10.78
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "7434109f-1dca-55bb-a7ce-4a42f9b2ffa4",
+    "catalog_version": "v2.0",
+    "road_name": "Phạm Văn Đồng — Cầu Bình Lợi",
+    "road_class": "trunk",
+    "direction": "east",
+    "length_m": 490.2,
+    "bearing": 63.02,
+    "lanes": 3,
+    "speed_limit_kph": 60.0,
+    "district": "Bình Thạnh",
+    "centroid_lat": 10.8353,
+    "centroid_lon": 106.7294,
+    "geometry_hash": "c6b68bdb1b5c9975",
+    "coordinates": [
+      [
+        106.7274,
+        10.8343
+      ],
+      [
+        106.7314,
+        10.8363
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "53d11a60-106b-5356-99db-70bbd4c3841d",
+    "catalog_version": "v2.0",
+    "road_name": "Nguyễn Văn Linh — Nguyễn Hữu Thọ",
+    "road_class": "trunk",
+    "direction": "east",
+    "length_m": 490.31,
+    "bearing": 63.03,
+    "lanes": 3,
+    "speed_limit_kph": 60.0,
+    "district": "Quận 7",
+    "centroid_lat": 10.7526,
+    "centroid_lon": 106.7251,
+    "geometry_hash": "3c4bce368b25bace",
+    "coordinates": [
+      [
+        106.7231,
+        10.7516
+      ],
+      [
+        106.7271,
+        10.7536
+      ]
+    ],
+    "active": true
+  },
+  {
+    "segment_id": "0fe692cb-a730-5625-9168-6006c876e3af",
+    "catalog_version": "v2.0",
+    "road_name": "Phú Mỹ Hưng — Tân Trào",
+    "road_class": "secondary",
+    "direction": "east",
+    "length_m": 490.34,
+    "bearing": 63.03,
+    "lanes": 2,
+    "speed_limit_kph": 50.0,
+    "district": "Quận 7",
+    "centroid_lat": 10.7228,
+    "centroid_lon": 106.7281,
+    "geometry_hash": "c85fc5dfa8a5eb43",
+    "coordinates": [
+      [
+        106.7261,
+        10.7218
+      ],
+      [
+        106.7301,
+        10.7238
+      ]
+    ],
+    "active": true
+  }
+]

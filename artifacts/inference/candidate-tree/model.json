@@ -1,0 +1,1048 @@
+{
+  "model_type": "gbt_regressor",
+  "num_trees": 100,
+  "num_features": 5,
+  "feature_names": [
+    "Latitude",
+    "Longitude",
+    "TimeInMinutes",
+    "DayOfWeek",
+    "Weekend"
+  ],
+  "tree_weights": [
+    1.0,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.1
+  ],
+  "trees": [
+    {
+      "tree_index": 0,
+      "weight": 1.0,
+      "root_node": {
+        "node_type": "internal",
+        "feature_index": 0,
+        "feature_name": "Latitude",
+        "threshold": 10.763449999999999,
+        "prediction": 27.615384615384617,
+        "left_child": {
+          "node_type": "internal",
+          "feature_index": 2,
+          "feature_name": "TimeInMinutes",
+          "threshold": 765.0,
+          "prediction": 45.0,
+          "left_child": {
+            "node_type": "internal",
+            "feature_index": 0,
+            "feature_name": "Latitude",
+            "threshold": 10.74165,
+            "prediction": 51.5,
+            "left_child": {
+              "node_type": "leaf",
+              "prediction": 48.0
+            },
+            "right_child": {
+              "node_type": "leaf",
+              "prediction": 55.0
+            }
+          },
+          "right_child": {
+            "node_type": "internal",
+            "feature_index": 0,
+            "feature_name": "Latitude",
+            "threshold": 10.74165,
+            "prediction": 38.5,
+            "left_child": {
+              "node_type": "leaf",
+              "prediction": 42.0
+            },
+            "right_child": {
+              "node_type": "leaf",
+              "prediction": 35.0
+            }
+          }
+        },
+        "right_child": {
+          "node_type": "internal",
+          "feature_index": 0,
+          "feature_name": "Latitude",
+          "threshold": 10.80085,
+          "prediction": 19.88888888888889,
+          "left_child": {
+            "node_type": "internal",
+            "feature_index": 2,
+            "feature_name": "TimeInMinutes",
+            "threshold": 765.0,
+            "prediction": 15.571428571428571,
+            "left_child": {
+              "node_type": "internal",
+              "feature_index": 0,
+              "feature_name": "Latitude",
+              "threshold": 10.777899999999999,
+              "prediction": 19.333333333333332,
+              "left_child": {
+                "node_type": "leaf",
+                "prediction": 25.0
+              },
+              "right_child": {
+                "node_type": "internal",
+                "feature_index": 0,
+                "feature_name": "Latitude",
+                "threshold": 10.78005,
+                "prediction": 16.5,
+                "left_child": {
+                  "node_type": "leaf",
+                  "prediction": 15.0
+                },
+                "right_child": {
+                  "node_type": "leaf",
+                  "prediction": 18.0
+                }
+              }
+            },
+            "right_child": {
+              "node_type": "internal",
+              "feature_index": 0,
+              "feature_name": "Latitude",
+              "threshold": 10.777899999999999,
+              "prediction": 12.75,
+              "left_child": {
+                "node_type": "internal",
+                "feature_index": 0,
+                "feature_name": "Latitude",
+                "threshold": 10.77535,
+                "prediction": 11.0,
+                "left_child": {
+                  "node_type": "leaf",
+                  "prediction": 10.0
+                },
+                "right_child": {
+                  "node_type": "leaf",
+                  "prediction": 12.0
+                }
+              },
+              "right_child": {
+                "node_type": "internal",
+                "feature_index": 0,
+                "feature_name": "Latitude",
+                "threshold": 10.78285,
+                "prediction": 14.5,
+                "left_child": {
+                  "node_type": "leaf",
+                  "prediction": 15.0
+                },
+                "right_child": {
+                  "node_type": "leaf",
+                  "prediction": 14.0
+                }
+              }
+            }
+          },
+          "right_child": {
+            "node_type": "internal",
+            "feature_index": 2,
+            "feature_name": "TimeInMinutes",
+            "threshold": 765.0,
+            "prediction": 35.0,
+            "left_child": {
+              "node_type": "leaf",
+              "prediction": 40.0
+            },
+            "right_child": {
+              "node_type": "leaf",
+              "prediction": 30.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "tree_index": 1,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 2,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 3,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 4,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 5,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 6,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 7,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 8,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 9,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 10,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 11,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 12,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 13,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 14,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 15,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 16,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 17,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 18,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 19,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 20,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 21,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 22,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 23,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 24,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 25,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 26,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 27,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 28,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 29,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 30,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 31,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 32,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 33,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 34,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 35,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 36,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 37,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 38,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 39,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 40,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 41,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 42,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 43,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 44,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 45,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 46,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 47,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 48,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 49,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 50,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 51,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 52,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 53,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 54,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 55,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 56,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 57,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 58,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 59,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 60,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 61,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 62,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 63,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 64,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 65,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 66,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 67,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 68,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 69,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 70,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 71,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 72,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 73,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 74,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 75,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 76,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 77,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 78,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 79,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 80,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 81,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 82,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 83,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 84,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 85,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 86,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 87,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 88,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 89,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 90,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 91,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 92,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 93,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 94,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 95,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 96,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 97,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 98,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    },
+    {
+      "tree_index": 99,
+      "weight": 0.1,
+      "root_node": {
+        "node_type": "leaf",
+        "prediction": 0.0
+      }
+    }
+  ]
+}

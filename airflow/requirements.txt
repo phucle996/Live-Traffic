@@ -1,0 +1,6 @@
+apache-airflow==2.7.3
+pandas==2.0.3
+pyspark==3.4.1
+requests==2.31.0
+pyyaml==6.0.1
+pytest==7.4.3

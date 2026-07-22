@@ -1,0 +1,50 @@
+# ==============================================================================
+# Multi-Stage Dockerfile for High-Performance Go Production Web Dashboard
+# Ultra-lightweight Alpine Runtime Container (~15MB image size)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Stage 1: Build binary using official Go toolchain
+# ------------------------------------------------------------------------------
+FROM golang:1.26-alpine as builder
+
+WORKDIR /app
+
+# Copy go.mod file
+COPY go.mod ./
+RUN go mod download || true
+
+# Copy source code
+COPY . .
+
+# Build static Go binary for Web Dashboard
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o web-dashboard ./cmd/web-dashboard
+
+# ------------------------------------------------------------------------------
+# Stage 2: Minimal Alpine runtime image
+# ------------------------------------------------------------------------------
+FROM alpine:3.19 as runtime
+
+WORKDIR /app
+
+# Copy compiled Go binary and web assets from builder
+COPY --from=builder /app/web-dashboard /app/web-dashboard
+COPY --from=builder /app/web /app/web
+
+# Tạo Non-root Daemon User (UID 10001) cho mục đích an ninh bảo mật container
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup -u 10001 \
+    && chown -R appuser:appgroup /app
+
+USER appuser:appgroup
+
+# Environment variables
+
+ENV PORT=8501
+
+EXPOSE 8501
+
+# Healthcheck probe for Docker Orchestration
+HEALTHCHECK --interval=5s --timeout=3s --retries=3 \
+  CMD curl -f http://localhost:8501/health/ready || exit 1
+
+ENTRYPOINT ["/app/web-dashboard"]

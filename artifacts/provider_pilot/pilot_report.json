@@ -1,0 +1,78 @@
+{
+  "schema_version": "here0_pilot_report_v1",
+  "generated_at": "PENDING — chạy summarize_here_pilot.py để tạo",
+  "phase": "HERE-0",
+  "description": "HERE Traffic API v7 pilot — TP.HCM 4-zone feasibility",
+  "note": "Raw data NOT for training until license explicitly confirmed in docs/providers/here_licensing_questions.md",
+  "zones": [
+    {
+      "name": "quan1",
+      "display": "Quận 1 — Trung tâm",
+      "bbox": "south=10.760 west=106.692 north=10.790 east=106.710",
+      "rationale": "Đường lớn mật độ cao nhất TP.HCM"
+    },
+    {
+      "name": "binh_thanh",
+      "display": "Bình Thạnh",
+      "bbox": "south=10.795 west=106.700 north=10.820 east=106.730",
+      "rationale": "Cầu Sài Gòn, Ngã tư Hàng Xanh, Điện Biên Phủ"
+    },
+    {
+      "name": "thu_duc",
+      "display": "TP. Thủ Đức",
+      "bbox": "south=10.845 west=106.770 north=10.890 east=106.820",
+      "rationale": "Xa lộ Hà Nội, cửa ngõ phía đông"
+    },
+    {
+      "name": "tan_son_nhat",
+      "display": "Khu vực Sân bay Tân Sơn Nhất",
+      "bbox": "south=10.800 west=106.655 north=10.830 east=106.685",
+      "rationale": "Điểm ùn tắc kinh niên, kiểm tra data quality giờ cao điểm"
+    }
+  ],
+  "records": [],
+  "acceptance": {
+    "summary": {
+      "total_records": 0,
+      "zones_with_data": [],
+      "slots_seen": [],
+      "total_flow_items": 0,
+      "coverage_percent": 0.0
+    },
+    "criteria": {
+      "coverage_zones_with_data": {
+        "required": ">= 80% zones có data",
+        "actual": "Chưa có dữ liệu",
+        "passed": null
+      },
+      "multi_slot_data": {
+        "required": "Có data ở >= 2 time slots khác nhau",
+        "actual": "Chưa có dữ liệu",
+        "passed": null
+      },
+      "no_training_before_license": {
+        "required": "Không dùng data train trước khi xác nhận license",
+        "actual": "Reminder — cần xác nhận manually tại here_licensing_questions.md",
+        "passed": null
+      },
+      "decision_documented": {
+        "required": "Có decision trong docs/providers/provider_decision.md",
+        "actual": "Cần review và điền thủ công",
+        "passed": null
+      }
+    },
+    "passed_auto": 0,
+    "failed_auto": 0,
+    "manual_needed": 4,
+    "overall_auto": "PENDING"
+  },
+  "how_to_run": {
+    "step_1": "export HERE_API_KEY=<your_development_key>",
+    "step_2": "bash scripts/provider_pilot/run_here_flow_pilot.sh",
+    "step_3": "python3 scripts/provider_pilot/summarize_here_pilot.py",
+    "step_4": "Điền here_licensing_questions.md",
+    "step_5": "Điền here_coverage_report.md",
+    "step_6": "Ký off provider_decision.md",
+    "note": "Lặp lại step_2+3 ở các giờ khác nhau để thu thập đủ time slots"
+  }
+}

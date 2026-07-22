@@ -1,0 +1,34 @@
+# ==============================================================================
+# ConfigMap — Non-Secret Environment Config (deploy/kubernetes/configmap.yaml)
+# All values use service DNS names — NO hardcoded IP addresses
+# Secrets (API keys, passwords) are NEVER stored in ConfigMap
+# ==============================================================================
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traffic-prediction-config
+  namespace: production
+data:
+  # Application environment identifier
+  ENVIRONMENT: "production"
+  LOG_LEVEL: "WARNING"
+
+  # API server URL: uses Kubernetes DNS service name — no IP hardcoding
+  API_BASE_URL: "http://traffic-prediction-api.production.svc.cluster.local"
+
+  # Kafka broker — service DNS name
+  KAFKA_BOOTSTRAP_SERVERS: "kafka.production.svc.cluster.local:9092"
+
+  # HDFS NameNode — DNS service name (HA: uses nameservice, not single IP)
+  HDFS_NAMESERVICE: "mycluster"
+  HDFS_NN_URL: "hdfs://mycluster"
+
+  # Prometheus metrics port
+  METRICS_PORT: "8000"
+
+  # Spark master — DNS service name
+  SPARK_MASTER_URL: "spark://spark-master.production.svc.cluster.local:7077"
+
+  # Airflow webserver — DNS service name
+  AIRFLOW_URL: "http://airflow-webserver.production.svc.cluster.local:8080"

@@ -1,0 +1,57 @@
+# ==============================================================================
+# Grafana / Prometheus Alert Rules (grafana_alerts.yml)
+# Cảnh báo tự động: Stale Live Data, Model Version Stale, Parity Gate Failure
+# ==============================================================================
+
+groups:
+  - name: traffic_system_alerts
+    interval: 30s
+    rules:
+
+      # Cảnh báo khi dữ liệu giao thông thời gian thực quá cũ (> 60 giây)
+      - alert: LiveDataStaleAlert
+        expr: live_cache_age_seconds > 60
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Live traffic data is stale!"
+          description: >
+            Dữ liệu giao thông thời gian thực đã bị stale > 60 giây.
+            Vui lòng kiểm tra Go Traffic Collector hoặc TomTom API quota.
+
+      # Cảnh báo khi tỷ lệ lỗi Rust Inference tăng cao bất thường
+      - alert: HighInferenceErrorRate
+        expr: rate(inference_errors_total[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Rust Inference Engine error rate is high!"
+          description: >
+            Tỷ lệ lỗi suy luận mô hình AI vượt 5% trong 5 phút qua.
+            Kiểm tra trạng thái Rust inference engine ngay.
+
+      # Cảnh báo khi Parity Gate bị thất bại (tổng số lần hot reload tăng đột ngột mà không có model mới)
+      - alert: ParityGateFailureAlert
+        expr: increase(model_reload_total[1h]) == 0 and model_rmse > 15
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Model parity gate may have failed!"
+          description: >
+            RMSE mô hình sản xuất vượt ngưỡng 15 nhưng không có lần hot reload nào
+            trong 1 giờ qua. Có thể Rust Parity Gate đã bị thất bại và chặn promote.
+
+      # Cảnh báo khi tỷ lệ lỗi ghi Kafka tăng cao
+      - alert: KafkaProduceErrorAlert
+        expr: rate(kafka_produce_errors_total[5m]) > 0.01
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Kafka produce error rate increased!"
+          description: >
+            Tỷ lệ lỗi ghi Kafka vượt 1% trong 5 phút qua.
+            Kiểm tra kết nối Kafka Broker ngay.

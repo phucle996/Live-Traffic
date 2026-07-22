@@ -1,0 +1,104 @@
+# ==============================================================================
+# Comprehensive Cloud-Native Monorepo GitIgnore Configuration
+# Quản lý loại trừ các file tạm, cache, build artifacts, secrets & môi trường
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Environment & Secret Credentials (Bảo mật tài khoản & API Keys)
+# ------------------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+
+# ------------------------------------------------------------------------------
+# 2. Node.js & Next.js Web Frontend (web/)
+# ------------------------------------------------------------------------------
+# Dependency packages
+web/node_modules/
+node_modules/
+
+# Next.js build outputs & cache directory
+web/.next/
+web/out/
+web/build/
+web/dist/
+
+# Next.js & Package Manager log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ------------------------------------------------------------------------------
+# 3. Rust Engine & Cargo Target Builds (services/rust-inference/)
+# ------------------------------------------------------------------------------
+# Thư mục chứa kết quả biên dịch binary của Rust Cargo
+services/rust-inference/target/
+target/
+**/*.rs.bk
+
+# ------------------------------------------------------------------------------
+# 4. Go Microservices Binaries & Compiled Executables (services/go-traffic/)
+# ------------------------------------------------------------------------------
+# Go compiled binaries
+services/go-traffic/live-api
+services/go-traffic/collector
+services/go-traffic/web-dashboard
+*.exe
+*.exe?
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+bin/
+
+# ------------------------------------------------------------------------------
+# 5. Python Bytecode, Caches & Virtual Environments
+# ------------------------------------------------------------------------------
+# Python bytecode & cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# ------------------------------------------------------------------------------
+# 6. IDE, Editors & OS System Temporary Files
+# ------------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ------------------------------------------------------------------------------
+# 7. Project Local Data Outputs, Logs & Artifacts
+# ------------------------------------------------------------------------------
+# Raw logs
+*.log
+logs/
+
+# Output directories (giữ lại .gitkeep để duy trì cấu trúc thư mục)
+data/output/*
+!data/output/.gitkeep
+artifacts/models/*
+!artifacts/models/.gitkeep
+artifacts/metrics/*
+!artifacts/metrics/.gitkeep
+artifacts/predictions/*
+!artifacts/predictions/.gitkeep
+artifacts/reports/*
+!artifacts/reports/.gitkeep

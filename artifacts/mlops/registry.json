@@ -1,0 +1,31 @@
+{
+  "versions": [
+    {
+      "version": "v1.0.0",
+      "run_id": "run_v1.0.0",
+      "artifact_path": "artifacts/model/v1.0.0",
+      "stage": "Production",
+      "metrics": {
+        "rmse": 7.2,
+        "r2": 0.72,
+        "test_rows": 1500
+      },
+      "registered_at": "2026-07-21T15:41:47Z",
+      "promoted_at": "2026-07-21T15:41:47Z"
+    },
+    {
+      "version": "v1.1.0",
+      "run_id": "run_v1.1.0",
+      "artifact_path": "artifacts/model/v1.1.0",
+      "stage": "Archived",
+      "metrics": {
+        "rmse": 6.5,
+        "r2": 0.72,
+        "test_rows": 1500
+      },
+      "registered_at": "2026-07-21T15:41:47Z",
+      "promoted_at": "2026-07-21T15:41:47Z"
+    }
+  ],
+  "production_version": null
+}

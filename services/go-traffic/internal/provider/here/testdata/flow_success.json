@@ -1,0 +1,52 @@
+{
+  "results": [
+    {
+      "location": {
+        "description": "Nguyen Hue Boulevard",
+        "length": 450.5,
+        "shape": {
+          "links": [
+            {
+              "points": [
+                { "lat": 10.7730, "lng": 106.7030 },
+                { "lat": 10.7750, "lng": 106.7042 }
+              ]
+            }
+          ]
+        }
+      },
+      "currentFlow": {
+        "speed": 24.5,
+        "freeFlow": 45.0,
+        "jamFactor": 4.2,
+        "confidence": 0.95,
+        "roadClosed": false,
+        "traversability": "open"
+      }
+    },
+    {
+      "location": {
+        "description": "Hang Xanh Intersection",
+        "length": 320.0,
+        "shape": {
+          "links": [
+            {
+              "points": [
+                { "lat": 10.8004, "lng": 106.7095 },
+                { "lat": 10.8024, "lng": 106.7135 }
+              ]
+            }
+          ]
+        }
+      },
+      "currentFlow": {
+        "speed": 12.0,
+        "freeFlow": 40.0,
+        "jamFactor": 8.5,
+        "confidence": 0.98,
+        "roadClosed": false,
+        "traversability": "open"
+      }
+    }
+  ]
+}

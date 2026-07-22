@@ -1,0 +1,18 @@
+# ==============================================================================
+# Processed Data Quality Expectations Specification (config/data_quality/processed_expectations.yaml)
+# ==============================================================================
+
+expectations:
+  non_null_columns:
+    - "location_id"
+    - "CurrentSpeed"
+    - "CongestionLevel"
+    - "Hour"
+    - "IsWeekend"
+  categorical_validations:
+    CongestionLevel:
+      allowed_values:
+        - "THÔNG THOÁNG"
+        - "BÌNH THƯỜNG"
+        - "ĐÔNG ĐÚC"
+        - "ÚN TẮC"

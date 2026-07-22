@@ -1,0 +1,33 @@
+# ==============================================================================
+# Production Namespace Definition (deploy/kubernetes/namespace.yaml)
+# Defines production namespace with labels and resource quotas
+# ==============================================================================
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: production
+  labels:
+    # Label used by NetworkPolicy selectors
+    kubernetes.io/metadata.name: production
+    environment: production
+    managed-by: helm
+---
+# ResourceQuota limits total resource consumption in the production namespace
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: production-resource-quota
+  namespace: production
+spec:
+  hard:
+    # Cap total CPU cores allocatable in this namespace
+    requests.cpu: "20"
+    limits.cpu: "40"
+    # Cap total memory in this namespace
+    requests.memory: 20Gi
+    limits.memory: 40Gi
+    # Cap number of pods to prevent runaway scaling
+    pods: "50"
+    # Cap number of PVCs
+    persistentvolumeclaims: "20"

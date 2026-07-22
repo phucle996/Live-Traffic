@@ -1,0 +1,114 @@
+# ==============================================================================
+# Prediction API Deployment (deploy/kubernetes/api-deployment.yaml)
+# HA: 3 replicas with topologySpreadConstraints (1 pod per node)
+# Rolling update: maxUnavailable=0 ensures zero downtime
+# Image tag MUST be set via kustomize/helm at deploy time (not :latest)
+# ==============================================================================
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-prediction-api
+  namespace: production
+  labels:
+    app: traffic-prediction-api
+    component: serving
+spec:
+  # Minimum 3 replicas for HA — PDB enforces minimum 2 available
+  replicas: 3
+  selector:
+    matchLabels:
+      app: traffic-prediction-api
+
+  # Rolling update strategy — zero-downtime deployments
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # Allows 1 extra pod during update (surge) but never removes existing pods until new ones are ready
+      maxSurge: 1
+      maxUnavailable: 0
+
+  template:
+    metadata:
+      labels:
+        app: traffic-prediction-api
+        component: serving
+    spec:
+      # Dedicated ServiceAccount with minimal RBAC permissions
+      serviceAccountName: traffic-prediction-sa
+
+      # topologySpreadConstraints: spread pods across nodes — no 2 pods on same host
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: traffic-prediction-api
+
+      # Graceful termination: give Uvicorn 30s to finish in-flight requests
+      terminationGracePeriodSeconds: 30
+
+      containers:
+        - name: prediction-api
+          # Image tag MUST be overridden with immutable Git SHA at deploy time
+          image: ghcr.io/traffic-prediction/traffic-prediction-api:IMAGE_TAG_PLACEHOLDER
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+
+          # Non-secret config from ConfigMap — no IP hardcoding
+          envFrom:
+            - configMapRef:
+                name: traffic-prediction-config
+
+          # Liveness probe: restart pod if API hangs/deadlocks
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            failureThreshold: 3
+
+          # Readiness probe: exclude pod from load balancer until ML model is loaded
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            failureThreshold: 3
+
+          # Resource requests and limits — avoids noisy-neighbor OOM issues
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 2000m
+              memory: 2Gi
+
+          # Mount model artifacts from PVC (ensures persistence across pod restarts)
+          volumeMounts:
+            - name: model-artifacts
+              mountPath: /app/artifacts
+              readOnly: true
+
+      volumes:
+        - name: model-artifacts
+          persistentVolumeClaim:
+            claimName: model-artifacts-pvc
+
+      # Pod anti-affinity: prefer pods on different nodes (soft rule as backup)
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: traffic-prediction-api
+                topologyKey: kubernetes.io/hostname

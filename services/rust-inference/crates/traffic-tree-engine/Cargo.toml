@@ -1,0 +1,16 @@
+# ==============================================================================
+# Traffic Tree Engine Crate Manifest (crates/traffic-tree-engine/Cargo.toml)
+# Native Rust Flat Array GBT Inference Engine with Iterative Zero-Allocation Traversal
+# ==============================================================================
+
+[package]
+name = "traffic-tree-engine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+rayon = { workspace = true }
+anyhow = { workspace = true }
+traffic-contract = { path = "../traffic-contract" }

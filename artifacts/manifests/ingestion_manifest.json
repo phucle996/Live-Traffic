@@ -1,0 +1,372 @@
+{
+  "2025-11-07_traffic_data_from_traffic.csv": {
+    "file_size": 168517,
+    "sha256": "919c96c508540649be8133e0baad0b6faf4685974a0c721b2a9fb51409032a75",
+    "row_count": 1828
+  },
+  "2025-11-08_traffic_data_from_traffic.csv": {
+    "file_size": 234635,
+    "sha256": "15d972490c6503d2cea72db91b5d6350871e9b44f87a167ed6e9d0015b68379f",
+    "row_count": 2541
+  },
+  "2025-11-09_traffic_data_from_traffic.csv": {
+    "file_size": 233180,
+    "sha256": "15a2aafb0daa337a5f29a8ea0c6406adf420a2037e7c05d5dfac810df83f86a4",
+    "row_count": 2521
+  },
+  "2025-11-10_traffic_data_from_traffic.csv": {
+    "file_size": 460392,
+    "sha256": "7c8ef8df084639c6408f0f846fc2bd5d20eb8febb87a5cd5c481ffe931bf198d",
+    "row_count": 4995
+  },
+  "2025-11-11_traffic_data_from_traffic.csv": {
+    "file_size": 419252,
+    "sha256": "be851d964923b62b560801c4b26a6181e7c5c580b2c3da209b516cb604b610fe",
+    "row_count": 4548
+  },
+  "2025-11-12_traffic_data_from_traffic.csv": {
+    "file_size": 204592,
+    "sha256": "be63a029e914d6dfc8d89709ea013fa766c821198725a11dd8aace983bc5257e",
+    "row_count": 2217
+  },
+  "2025-11-13_traffic_data_from_traffic.csv": {
+    "file_size": 101655,
+    "sha256": "cbbc30496b1b3d4bfcabb1d49c11c9d6cb8ed57c306226909775948a79d92db5",
+    "row_count": 1101
+  },
+  "2025-11-14_traffic_data_from_traffic.csv": {
+    "file_size": 447905,
+    "sha256": "3104d986942d8e6f00c29e062b35b5e8fb857199b172ecb86389661e08fbd5f0",
+    "row_count": 4855
+  },
+  "2025-11-15_traffic_data_from_traffic.csv": {
+    "file_size": 566898,
+    "sha256": "3430418b678f7bc2e487bb5b730b52a246a581d09bf74cb7550a2e81bfeb2a3e",
+    "row_count": 6143
+  },
+  "2025-11-17_traffic_data_from_traffic.csv": {
+    "file_size": 596383,
+    "sha256": "7c7846b22a17a801cdd82470494e8385e713bea585ec0e91b41f57fe83237600",
+    "row_count": 6470
+  },
+  "2025-11-18_traffic_data_from_traffic.csv": {
+    "file_size": 464295,
+    "sha256": "d77633bee9f5c1f1b0cb16e90d7a94592fe9da5bd258883eeb1b96ac4d32cda1",
+    "row_count": 5033
+  },
+  "2025-11-19_traffic_data_from_traffic.csv": {
+    "file_size": 549519,
+    "sha256": "016d81a4f4991471d442e02db69d61548917482a69fce78a9f15166fc133e980",
+    "row_count": 5957
+  },
+  "2025-11-20_traffic_data_from_traffic.csv": {
+    "file_size": 627962,
+    "sha256": "b90f870f0fd8a157d6bd4627ba12cc9eac88e5810168be77552e92f0c9e916de",
+    "row_count": 6808
+  },
+  "2025-11-21_traffic_data_from_traffic.csv": {
+    "file_size": 659868,
+    "sha256": "3c6be70307efb6ccf6eacf0247163c7dab5cdb22b6920a1807275e5b710e092d",
+    "row_count": 7147
+  },
+  "2025-11-22_traffic_data_from_traffic.csv": {
+    "file_size": 628452,
+    "sha256": "6db6b898802b134067ab0fa6867b41ab4c6198089c8ff790cb1e1eedc89fef63",
+    "row_count": 6810
+  },
+  "2025-11-23_traffic_data_from_traffic.csv": {
+    "file_size": 558790,
+    "sha256": "043dd8a1f615d833ea35a9cf5352258d2cab4074785514dc2a2c6013c4e7844f",
+    "row_count": 6054
+  },
+  "2025-11-24_traffic_data_from_traffic.csv": {
+    "file_size": 371783,
+    "sha256": "0a7a48df63cabbd47662b20b53260aa61d607537e70901163d48034e77e1999b",
+    "row_count": 4033
+  },
+  "2025-11-25_traffic_data_from_traffic.csv": {
+    "file_size": 399775,
+    "sha256": "98f23598ed28ac0fafd6ec99e3c4aa0241098dd83a68ada31ee8027fa3dcfb93",
+    "row_count": 4333
+  },
+  "2025-11-26_traffic_data_from_traffic.csv": {
+    "file_size": 433094,
+    "sha256": "c71b5c945c97faf849b2fe6f6011e084835d6e390a15f2e8b030b6b267c6358d",
+    "row_count": 4698
+  },
+  "2025-11-27_traffic_data_from_traffic.csv": {
+    "file_size": 463349,
+    "sha256": "57fee6f7b1fb4f1e2abf0a03d1096c7b224de00d9152635fd039584201d15c10",
+    "row_count": 5023
+  },
+  "2025-11-28_traffic_data_from_traffic.csv": {
+    "file_size": 628961,
+    "sha256": "23ec75f221d2a676a6311a8587554a5c4f417c3cadcde3ed9ccfbbff0ca88bee",
+    "row_count": 6815
+  },
+  "2025-11-29_traffic_data_from_traffic.csv": {
+    "file_size": 444533,
+    "sha256": "b74ff4374df7b99664bf3cca7b91dd745222b57acf36dc368f37cc8d2cc44bdd",
+    "row_count": 4810
+  },
+  "2025-11-30_traffic_data_from_traffic.csv": {
+    "file_size": 262299,
+    "sha256": "27f227226fd612dddfe01c26a4f2ac2af6277e7b2b593b4da09c4f5e3095ceb4",
+    "row_count": 2843
+  },
+  "2025-12-01_traffic_data_from_traffic.csv": {
+    "file_size": 497958,
+    "sha256": "59a4778562430d6d60f84f265e4a014f0204a119682a398dbc1712f170f2d7fa",
+    "row_count": 5398
+  },
+  "2025-12-02_traffic_data_from_traffic.csv": {
+    "file_size": 446934,
+    "sha256": "c456514a7c6109d7a64aa971df07f5841486e5d6df7855e1d78f4f6a29b74fe3",
+    "row_count": 4846
+  },
+  "2025-12-03_traffic_data_from_traffic.csv": {
+    "file_size": 566463,
+    "sha256": "18b7b1777db6f7c7b5a9b2437bfe77a4494822b6cc9868124d4f03e33f9f05c6",
+    "row_count": 6142
+  },
+  "2025-12-04_traffic_data_from_traffic.csv": {
+    "file_size": 600871,
+    "sha256": "85280017525725aaebbbf43d74d37e4ef0a2824baaa855ff065f508bad6f216e",
+    "row_count": 6512
+  },
+  "2025-12-05_traffic_data_from_traffic.csv": {
+    "file_size": 499245,
+    "sha256": "9b44cbf3fbd2c630084561cc68649898c7ebc0183413777dc2409b40b259db58",
+    "row_count": 5409
+  },
+  "2025-12-06_traffic_data_from_traffic.csv": {
+    "file_size": 535601,
+    "sha256": "5dd9deee9a4f71e523159709c00294575dbc98af5db4139b3bd8a24fc7c8a571",
+    "row_count": 5800
+  },
+  "2025-12-07_traffic_data_from_traffic.csv": {
+    "file_size": 631326,
+    "sha256": "858c721d57fa98f46002d1527f2a47e26c636fa500ecfa9688790f0d4cefd7f4",
+    "row_count": 6845
+  },
+  "2025-12-08_traffic_data_from_traffic.csv": {
+    "file_size": 384310,
+    "sha256": "b33935d8d1ffe2af700cdbcc8f9ec36c8072b6c5c10e34fb0e936e4f1e071892",
+    "row_count": 4169
+  },
+  "2025-12-09_traffic_data_from_traffic.csv": {
+    "file_size": 494808,
+    "sha256": "d8a8e601518d6b3015f89316dc8c45baf0f7578ab4d8684498451104bb44b737",
+    "row_count": 5359
+  },
+  "2025-12-10_traffic_data_from_traffic.csv": {
+    "file_size": 481661,
+    "sha256": "a689f7e6d6841662b8f7939f7dc8fc4d20c78b175285611bd8cb1d8dd57bb22a",
+    "row_count": 5217
+  },
+  "2025-12-11_traffic_data_from_traffic.csv": {
+    "file_size": 395892,
+    "sha256": "bf627505f8f675746e1867db397a67e9f27377430ce264ceef0cc23623fd2176",
+    "row_count": 4292
+  },
+  "2025-12-12_traffic_data_from_traffic.csv": {
+    "file_size": 416998,
+    "sha256": "b0c167b39c0a379631e17193554221a6cbeced94749439a258e441d4bbe848f7",
+    "row_count": 4514
+  },
+  "2025-12-13_traffic_data_from_traffic.csv": {
+    "file_size": 591085,
+    "sha256": "74d15dcf515e60fd912072522b7f23eeab0f7b92451a63156745912b68acd754",
+    "row_count": 6401
+  },
+  "2025-12-14_traffic_data_from_traffic.csv": {
+    "file_size": 543055,
+    "sha256": "c8aef3cbd04f705fe3e624859330625ae3ac3482278b96083e3ea62e98d8987d",
+    "row_count": 5883
+  },
+  "preprocess_2025-11-07_traffic_data_from_traffic.csv": {
+    "file_size": 118555,
+    "sha256": "1013259fa5c168388bdc96f083e2e2466adc3a27262484cbb010b6c3831028a9",
+    "row_count": 1828
+  },
+  "preprocess_2025-11-08_traffic_data_from_traffic.csv": {
+    "file_size": 163947,
+    "sha256": "305d2945718ab15696da120a472f5c8445b817c8a47a4400d88c3116ee9c4832",
+    "row_count": 2525
+  },
+  "preprocess_2025-11-09_traffic_data_from_traffic.csv": {
+    "file_size": 162085,
+    "sha256": "7dc9aa39503c38d9c774dc3d0cc736065ff2ff626687ccc92e89dab69f4a6271",
+    "row_count": 2521
+  },
+  "preprocess_2025-11-10_traffic_data_from_traffic.csv": {
+    "file_size": 323103,
+    "sha256": "a5fbdda69a89ebb4b92100310b0637f5827188e2b5ce4b2f94aa14646daee443",
+    "row_count": 4995
+  },
+  "preprocess_2025-11-11_traffic_data_from_traffic.csv": {
+    "file_size": 295380,
+    "sha256": "a6319111fee6bd7e6f0330c684f611ae4c5067c3810c34bf843a9fff2e514ade",
+    "row_count": 4548
+  },
+  "preprocess_2025-11-12_traffic_data_from_traffic.csv": {
+    "file_size": 144130,
+    "sha256": "d1ceb512c1d5642e4d38539ae135d78775eba396cbac277c26f8f51288ee8fa2",
+    "row_count": 2217
+  },
+  "preprocess_2025-11-13_traffic_data_from_traffic.csv": {
+    "file_size": 71575,
+    "sha256": "0135dc505dfbb746701e611274c397b1818197467be7fa5d21fa20f5c376656d",
+    "row_count": 1101
+  },
+  "preprocess_2025-11-14_traffic_data_from_traffic.csv": {
+    "file_size": 314164,
+    "sha256": "a7af8e86172508d58e0f5b96baf99a36c79536524abcd569a8b69a08a4f44af1",
+    "row_count": 4855
+  },
+  "preprocess_2025-11-15_traffic_data_from_traffic.csv": {
+    "file_size": 395959,
+    "sha256": "1136d6744214191e309e814334c45a08eeb24560ebbad995a422219dbe8df31e",
+    "row_count": 6119
+  },
+  "preprocess_2025-11-17_traffic_data_from_traffic.csv": {
+    "file_size": 418590,
+    "sha256": "38e34ce061716b5995c1945505eac739aa93f3c2ab81aad18ce9ec5cd289fd3b",
+    "row_count": 6470
+  },
+  "preprocess_2025-11-18_traffic_data_from_traffic.csv": {
+    "file_size": 325952,
+    "sha256": "c8d23c49e2508036f79c8a700ee9e98cb6063e1b3eeac5234df0b0b13e663d31",
+    "row_count": 5033
+  },
+  "preprocess_2025-11-19_traffic_data_from_traffic.csv": {
+    "file_size": 386205,
+    "sha256": "f88b215de72416c31a8dead22a27ed839752a31d54be22653f24def6aa28abb8",
+    "row_count": 5957
+  },
+  "preprocess_2025-11-20_traffic_data_from_traffic.csv": {
+    "file_size": 441315,
+    "sha256": "db7a59a9bfba8eecdd8326b1c14f7e906de01ccf8b439ff49ee234567846edc1",
+    "row_count": 6808
+  },
+  "preprocess_2025-11-21_traffic_data_from_traffic.csv": {
+    "file_size": 462947,
+    "sha256": "6b5b23846dbf500400448545555974660ec11e05731f5051057b8950e62dabd6",
+    "row_count": 7147
+  },
+  "preprocess_2025-11-22_traffic_data_from_traffic.csv": {
+    "file_size": 439607,
+    "sha256": "05cc6be441c0e7d233cfa836ff03f01ce2473712bdae2ae99064cd5650b7088d",
+    "row_count": 6777
+  },
+  "preprocess_2025-11-23_traffic_data_from_traffic.csv": {
+    "file_size": 388876,
+    "sha256": "2b2b8683e04e9a113c1aa2d543a668351b5d8d2279d177779765343d70cb83ec",
+    "row_count": 6040
+  },
+  "preprocess_2025-11-24_traffic_data_from_traffic.csv": {
+    "file_size": 260743,
+    "sha256": "5b23a37abb6e84f404db3ddf6f716f691d963b0f6575da2e682094fe38e5fec8",
+    "row_count": 4033
+  },
+  "preprocess_2025-11-25_traffic_data_from_traffic.csv": {
+    "file_size": 281398,
+    "sha256": "7cbf57d06d86a067bf1585eae76f432efb5e0a5c02942c4e3d1a0566f0a48f0c",
+    "row_count": 4333
+  },
+  "preprocess_2025-11-26_traffic_data_from_traffic.csv": {
+    "file_size": 303732,
+    "sha256": "6d3412b0f98938a2ba04b0479a4eaa4d70131beed34985b1cdbd24aa76e82304",
+    "row_count": 4698
+  },
+  "preprocess_2025-11-27_traffic_data_from_traffic.csv": {
+    "file_size": 325161,
+    "sha256": "24aeb7594d2e3396b09c8d40a7678f5910b7e4871cc50883440b80a847d11701",
+    "row_count": 5023
+  },
+  "preprocess_2025-11-28_traffic_data_from_traffic.csv": {
+    "file_size": 441142,
+    "sha256": "adfe166da8d414970a16123180ab4a5d6fd92e5d633c20d1736a44114e61703c",
+    "row_count": 6815
+  },
+  "preprocess_2025-11-29_traffic_data_from_traffic.csv": {
+    "file_size": 311071,
+    "sha256": "3444ab56db05ffb85129da29812eb2c108ce994cf50980bf53e15bf18a420279",
+    "row_count": 4799
+  },
+  "preprocess_2025-11-30_traffic_data_from_traffic.csv": {
+    "file_size": 182336,
+    "sha256": "e05af8e0b3f8ea9a8a12f72d60a76160abe3c5f0611cbec2b8e49952973eead9",
+    "row_count": 2827
+  },
+  "preprocess_2025-12-01_traffic_data_from_traffic.csv": {
+    "file_size": 349897,
+    "sha256": "2bb1b8eba4a730fd4db45024c610d2b7925312a725aa7c5d2064cd8965b0270e",
+    "row_count": 5398
+  },
+  "preprocess_2025-12-02_traffic_data_from_traffic.csv": {
+    "file_size": 313841,
+    "sha256": "a3d5514a05609415eb5f46ae0c555fce58621d67c06e56f6431c307d6914f4e5",
+    "row_count": 4846
+  },
+  "preprocess_2025-12-03_traffic_data_from_traffic.csv": {
+    "file_size": 398275,
+    "sha256": "273145c68a3abba0a29e37832051b731af20484ebf621e4fc701c857de9eb2df",
+    "row_count": 6142
+  },
+  "preprocess_2025-12-04_traffic_data_from_traffic.csv": {
+    "file_size": 422252,
+    "sha256": "7a817c9c017b176745d28f4673479374e7dd62d97be51e013a7a95c203999c60",
+    "row_count": 6512
+  },
+  "preprocess_2025-12-05_traffic_data_from_traffic.csv": {
+    "file_size": 349780,
+    "sha256": "91878c44aff9e63e8ca5a95e37a851d99602f014e5eea1500c5d39ac910c4d5e",
+    "row_count": 5409
+  },
+  "preprocess_2025-12-06_traffic_data_from_traffic.csv": {
+    "file_size": 375748,
+    "sha256": "16afb8f0c8c1f3dd8a023bd419469b03549aa8e68311e5d0ef83d7873f89b54f",
+    "row_count": 5786
+  },
+  "preprocess_2025-12-07_traffic_data_from_traffic.csv": {
+    "file_size": 439679,
+    "sha256": "03721065fcb3437d38971ad6864815d82d352c16e5da2e8bfcbc6844e0295c1f",
+    "row_count": 6825
+  },
+  "preprocess_2025-12-08_traffic_data_from_traffic.csv": {
+    "file_size": 270181,
+    "sha256": "f07bcba5ddacbfc39574985d8eb01c35466d8af8af8230ec2cf1e696ba57c341",
+    "row_count": 4169
+  },
+  "preprocess_2025-12-09_traffic_data_from_traffic.csv": {
+    "file_size": 347496,
+    "sha256": "2d6170131d1c3b67a95198065e428ae0ef06b73e118ad14b7c83fa2e522fb62e",
+    "row_count": 5359
+  },
+  "preprocess_2025-12-10_traffic_data_from_traffic.csv": {
+    "file_size": 338819,
+    "sha256": "71cce227abbaf15ec1db15bb76ef7d573b2a197ef92022444a1c04e37e87dfd2",
+    "row_count": 5217
+  },
+  "preprocess_2025-12-11_traffic_data_from_traffic.csv": {
+    "file_size": 277118,
+    "sha256": "b73b32336c5ed2e32ed2a1fa64970544eae482a18fbea7396eb9850fa48169b1",
+    "row_count": 4292
+  },
+  "preprocess_2025-12-12_traffic_data_from_traffic.csv": {
+    "file_size": 293800,
+    "sha256": "75cf5b48ced6f44105640048b966c4658d44a5050b47bab1814645cb956f4597",
+    "row_count": 4514
+  },
+  "preprocess_2025-12-13_traffic_data_from_traffic.csv": {
+    "file_size": 413824,
+    "sha256": "cf7221be107c0d5ee1c73362310e0b934917e34dbbc580aee8ec32b685ad845e",
+    "row_count": 6374
+  },
+  "preprocess_2025-12-14_traffic_data_from_traffic.csv": {
+    "file_size": 376809,
+    "sha256": "dc07514fcebbcd28d988442a7a1bb30b251d4376e12001c15156b18009cc631c",
+    "row_count": 5863
+  }
+}

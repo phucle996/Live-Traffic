@@ -1,0 +1,17 @@
+# ==============================================================================
+# Spatial Matching Thresholds (config/matching/thresholds.yaml)
+# Phase HERE-4 / ROAD-2 — Ngưỡng khớp tọa độ địa lý HERE Flow -> Road Catalog
+# ==============================================================================
+version: "v1.0"
+
+matching:
+  min_match_score: 0.70        # Ngưỡng tối thiểu để chấp nhận "matched"
+  ambiguous_delta: 0.05        # Khoảng chênh lệch giữa top 1 và top 2 để coi là "ambiguous"
+  max_distance_m: 150.0        # Khoảng cách tối đa (mét) giữa điểm quan sát và segment
+  max_bearing_delta_deg: 45.0  # Chênh lệch góc hướng (độ) tối đa cho phép
+
+weights:
+  distance: 0.40               # Trọng số khoảng cách không gian
+  bearing: 0.35                # Trọng số góc hướng di chuyển (bearing/direction)
+  road_class: 0.15             # Trọng số tương thích cấp đường
+  name_similarity: 0.10        # Trọng số giống nhau của tên đường

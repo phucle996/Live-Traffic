@@ -1,0 +1,87 @@
+# ==============================================================================
+# NetworkPolicy (deploy/kubernetes/network-policy.yaml)
+# Default DENY ALL ingress to API pods.
+# Whitelist ONLY traffic from the nginx ingress-controller namespace.
+# Prevents unauthorized pod-to-pod lateral movement within the cluster.
+# ==============================================================================
+
+# Policy 1: Deny all ingress to API pods by default
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-ingress-api
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: traffic-prediction-api
+  policyTypes:
+    - Ingress
+  # Empty ingress rules = deny all ingress by default
+
+---
+# Policy 2: Allow ingress ONLY from nginx ingress-controller pods
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-controller-to-api
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: traffic-prediction-api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        # Only allow from pods in the ingress-nginx namespace
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8000
+
+---
+# Policy 3: Allow Prometheus scraping from monitoring namespace
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-prometheus-scrape-api
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: traffic-prediction-api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: monitoring
+      ports:
+        - protocol: TCP
+          port: 8000
+
+---
+# Policy 4: Allow dashboard pods to call the API service internally
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dashboard-to-api
+  namespace: production
+spec:
+  podSelector:
+    matchLabels:
+      app: traffic-prediction-api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: traffic-dashboard
+      ports:
+        - protocol: TCP
+          port: 8000

@@ -1,0 +1,95 @@
+# ==============================================================================
+# PersistentVolumeClaims (deploy/kubernetes/persistent-volumes.yaml)
+# Production data MUST reside on persistent storage — never on emptyDir.
+# emptyDir is wiped on pod restart; PVC survives pod/node failures.
+# ==============================================================================
+
+# PVC 1: ML model artifacts — mounted read-only into API pods
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-artifacts-pvc
+  namespace: production
+  labels:
+    component: ml-serving
+spec:
+  # ReadWriteMany: multiple API pods can mount simultaneously (requires NFS/CephFS)
+  accessModes:
+    - ReadWriteMany
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+# PVC 2: HDFS DataNode-1 persistent data volume
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hdfs-datanode-1-pvc
+  namespace: production
+  labels:
+    component: hdfs
+    role: datanode
+spec:
+  # ReadWriteOnce: single DataNode pod owns this disk
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      # Each DataNode gets 200Gi for raw traffic Parquet data storage
+      storage: 200Gi
+
+---
+# PVC 3: HDFS DataNode-2 persistent data volume
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hdfs-datanode-2-pvc
+  namespace: production
+  labels:
+    component: hdfs
+    role: datanode
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 200Gi
+
+---
+# PVC 4: HDFS DataNode-3 persistent data volume
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hdfs-datanode-3-pvc
+  namespace: production
+  labels:
+    component: hdfs
+    role: datanode
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 200Gi
+
+---
+# PVC 5: Airflow metadata DB persistent storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: airflow-db-pvc
+  namespace: production
+  labels:
+    component: airflow
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 20Gi

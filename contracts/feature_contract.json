@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "contract_name": "TrafficPredictionFeatureContract",
+  "version": "1.0.0",
+  "description": "Single Source of Truth (SOT) cho Feature Order, kiểu dữ liệu f64, quy tắc biến đổi thời gian và quy tắc kiểm soát chất lượng dữ liệu áp dụng thống nhất giữa PySpark, Go và Rust.",
+  "features": [
+    {
+      "name": "Latitude",
+      "index": 0,
+      "data_type": "f64",
+      "description": "Vĩ độ địa lý WGS-84",
+      "bounds": {
+        "min": 8.0,
+        "max": 24.0
+      },
+      "nullable": false
+    },
+    {
+      "name": "Longitude",
+      "index": 1,
+      "data_type": "f64",
+      "description": "Kinh độ địa lý WGS-84",
+      "bounds": {
+        "min": 102.0,
+        "max": 110.0
+      },
+      "nullable": false
+    },
+    {
+      "name": "FreeFlowSpeed",
+      "index": 2,
+      "data_type": "f64",
+      "description": "Tốc độ tự do chuẩn (km/h)",
+      "bounds": {
+        "min": 1.0,
+        "max": 150.0
+      },
+      "nullable": false
+    },
+    {
+      "name": "Confidence",
+      "index": 3,
+      "data_type": "f64",
+      "description": "Điểm độ tin cậy cảm biến",
+      "bounds": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "nullable": false
+    },
+    {
+      "name": "Hour",
+      "index": 4,
+      "data_type": "f64",
+      "description": "Giờ trong ngày (0-23)",
+      "bounds": {
+        "min": 0.0,
+        "max": 23.0
+      },
+      "nullable": false
+    },
+    {
+      "name": "Minute",
+      "index": 5,
+      "data_type": "f64",
+      "description": "Phút trong giờ (0-59)",
+      "bounds": {
+        "min": 0.0,
+        "max": 59.0
+      },
+      "nullable": false
+    },
+    {
+      "name": "TimeInMinutes",
+      "index": 6,
+      "data_type": "f64",
+      "description": "Tổng số phút tính từ 00:00 (Hour*60 + Minute)",
+      "bounds": {
+        "min": 0.0,
+        "max": 1439.0
+      },
+      "nullable": false
+    },
+    {
+      "name": "DayOfWeek",
+      "index": 7,
+      "data_type": "f64",
+      "description": "Thứ trong tuần (0=Monday .. 6=Sunday)",
+      "bounds": {
+        "min": 0.0,
+        "max": 6.0
+      },
+      "nullable": false
+    },
+    {
+      "name": "Weekend",
+      "index": 8,
+      "data_type": "f64",
+      "description": "Cờ ngày cuối tuần (1 nếu Thứ 7/Chủ Nhật, 0 nếu Ngày thường)",
+      "bounds": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "nullable": false
+    }
+  ],
+  "feature_order": [
+    "Latitude",
+    "Longitude",
+    "FreeFlowSpeed",
+    "Confidence",
+    "Hour",
+    "Minute",
+    "TimeInMinutes",
+    "DayOfWeek",
+    "Weekend"
+  ],
+  "transformations": {
+    "timezone": "UTC",
+    "day_of_week_mapping": {
+      "formula": "(spark_day_of_week + 5) % 7",
+      "mapping": {
+        "1": 6,
+        "2": 0,
+        "3": 1,
+        "4": 2,
+        "5": 3,
+        "6": 4,
+        "7": 5
+      }
+    },
+    "weekend_mapping": {
+      "condition": "day_of_week >= 5",
+      "true_value": 1,
+      "false_value": 0
+    }
+  },
+  "null_policy": {
+    "strategy": "drop_or_quarantine",
+    "default_confidence": 0.95,
+    "default_free_flow_speed": 45.0
+  },
+  "prediction_clamp": {
+    "min_speed_kmh": 0.0,
+    "max_speed_kmh_multiplier": 1.1,
+    "unit": "km/h"
+  }
+}

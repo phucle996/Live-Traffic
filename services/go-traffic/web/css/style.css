@@ -1,0 +1,536 @@
+/* ==============================================================================
+   Google Maps Dark Theme Design System (services/go-traffic/web/css/style.css)
+   Full-Screen Canvas Map + Floating Glassmorphic Overlays + HSL Color Tokens
+   ============================================================================== */
+
+/* 1. Thiết lập biến CSS màu sắc HSL và Token toàn hệ thống */
+:root {
+    --bg-dark: #0f172a;                  /* Nền tối Slate 900 */
+    --card-bg: rgba(15, 23, 42, 0.88);    /* Thẻ Kính mờ Glassmorphism */
+    --card-border: rgba(255, 255, 255, 0.12); /* Đường viền mờ cao cấp */
+    --text-primary: #f8fafc;             /* Chữ chính Trắng Slate 50 */
+    --text-secondary: #94a3b8;           /* Chữ phụ Xám Slate 400 */
+    --accent-blue: #38bdf8;              /* Xanh Sky 400 */
+    --accent-indigo: #818cf8;            /* Tím Indigo 400 */
+    --accent-green: #22c55e;             /* Xanh Lá Traffic Thông thoáng */
+    --accent-yellow: #eab308;            /* Vàng Traffic Di chuyển chậm */
+    --accent-red: #ef4444;               /* Đỏ Traffic Ùn tắc */
+    --shadow-gmaps: 0 12px 32px 0 rgba(0, 0, 0, 0.45); /* Bóng đổ Google Maps Floating Card */
+}
+
+/* 2. Reset mặc định toàn bộ trang web */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* 3. Phủ body kín toàn màn hình viewport */
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+/* 4. Container ứng dụng tràn màn hình (Full Viewport App Layout) */
+.app-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 5. Canvas Bản đồ Leaflet phủ 100% diện tích làm nền chính */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+/* 6. Thanh Tìm kiếm Nổi phong cách Google Maps (Floating Top Search Bar) */
+.gmaps-search-bar {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 380px;
+    padding: 8px 14px;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-gmaps);
+    transition: all 0.3s ease;
+}
+
+/* 7. Hiệu ứng active khi ô tìm kiếm được chọn */
+.gmaps-search-bar:focus-within {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+}
+
+/* 8. Nút Toggle mở/tắt Side Drawer */
+.menu-toggle-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.menu-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 9. Ô Input tìm kiếm tên đường real-time */
+.search-input-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-input-box input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.search-input-box input::placeholder {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+/* 10. Nút Refresh dữ liệu giao thông */
+.btn-refresh {
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-refresh:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+/* 11. Bảng Thông tin Nổi bên trái (Collapsible Floating Side Drawer) */
+.gmaps-side-drawer {
+    position: absolute;
+    top: 76px;
+    left: 16px;
+    bottom: 24px;
+    width: 380px;
+    z-index: 999;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-gmaps);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+/* 12. Lớp ẩn Side Drawer khi thu gọn */
+.gmaps-side-drawer.collapsed {
+    transform: translateX(-410px);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 13. Header Side Drawer chứa Tiêu đề & Logo */
+.drawer-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.drawer-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.drawer-title h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 14. Huy hiệu Trạng thái Nguồn (Live/Seed Mode Badge) */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--accent-green);
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-green);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--accent-green);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* 15. Thanh Chọn Vùng Miền Toàn Quốc & Dropdown 63 Tỉnh Thành */
+.region-filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.province-select {
+    width: 100%;
+    background: rgba(30, 41, 59, 0.9);
+    color: var(--text-primary);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.province-select:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.btn-predict-all {
+    width: 100%;
+    background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 4px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-predict-all:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.5);
+}
+
+.region-tabs-container {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+
+.region-tabs-container::-webkit-scrollbar {
+    display: none;
+}
+
+.region-pill {
+    padding: 5px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.region-pill:hover {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--text-primary);
+}
+
+.region-pill.active {
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    color: #ffffff;
+    border-color: #38bdf8;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
+/* 16. Thanh Tiến Trình Mật Độ Giao Thông (%) */
+.density-bar-wrapper {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+.density-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+/* 17. Khối KPI Thống kê nhanh */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.kpi-card {
+    text-align: center;
+    padding: 8px 4px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.kpi-label {
+    font-size: 10px;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kpi-value {
+
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-blue);
+}
+
+/* 16. Danh sách các tuyến đường giao thông */
+.street-list-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px;
+}
+
+/* 17. Từng Item tuyến đường trong danh sách */
+.street-card-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.street-card-item:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateX(3px);
+}
+
+.street-info h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.street-info p {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.street-speed-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.speed-val {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.btn-predict-mini {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--accent-blue);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-predict-mini:hover {
+    background: var(--accent-blue);
+    color: #0f172a;
+}
+
+/* 18. Thẻ Chú giải Vận tốc Nổi góc dưới bên phải (Floating Speed Legend) */
+.gmaps-legend-card {
+    position: absolute;
+    bottom: 24px;
+    right: 16px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-gmaps);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* 19. Nút Chuyển Đổi Nền Bản Đồ Google Maps Mới Nhất (Google Maps Layer Controller) */
+.gmaps-tile-switcher {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 999;
+    display: flex;
+    gap: 6px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 4px;
+    box-shadow: var(--shadow-gmaps);
+}
+
+.tile-btn {
+    padding: 6px 12px;
+    border-radius: 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tile-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tile-btn.active {
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dot-green { width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; }
+.dot-yellow { width: 8px; height: 8px; background: var(--accent-yellow); border-radius: 50%; }
+.dot-red { width: 8px; height: 8px; background: var(--accent-red); border-radius: 50%; }
+
+/* 19. Modal Kết quả Suy luận AI Glassmorphism */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.glass-modal-card {
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    width: 440px;
+    margin: 12vh auto;
+    padding: 24px;
+    color: var(--text-primary);
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.close-modal-btn {
+    position: absolute;
+    right: 18px; top: 14px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+.close-modal-btn:hover {
+    color: var(--accent-red);
+}

@@ -1,0 +1,30 @@
+# ==============================================================================
+# Traffic API Crate Manifest (crates/traffic-api/Cargo.toml)
+# Axum + Tokio REST API Serving Engine for High-Availability Production Inference
+# ==============================================================================
+
+[package]
+name = "traffic-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+axum = { workspace = true }
+tower = "0.5"
+tower-http = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow = { workspace = true }
+chrono = { workspace = true }
+# Prometheus metrics client cho GET /metrics endpoint
+prometheus = "0.13"
+jsonwebtoken = "9"
+arc-swap = "1.6"
+sha2 = "0.10"
+traffic-contract = { path = "../traffic-contract" }
+traffic-tree-engine = { path = "../traffic-tree-engine" }
+
+

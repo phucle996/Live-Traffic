@@ -1,0 +1,22 @@
+# ==============================================================================
+# Prediction API Service (deploy/kubernetes/api-service.yaml)
+# ClusterIP service — no external IP hardcoding, accessed via DNS service name
+# ==============================================================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: traffic-prediction-api
+  namespace: production
+  labels:
+    app: traffic-prediction-api
+spec:
+  # ClusterIP: internal-only access — Ingress controller routes external traffic
+  type: ClusterIP
+  selector:
+    app: traffic-prediction-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8000
+      protocol: TCP

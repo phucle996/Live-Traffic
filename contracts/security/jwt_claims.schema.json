@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JWTClaims",
+  "type": "object",
+  "properties": {
+    "sub": {
+      "type": "string",
+      "description": "User ID / Subject identifier"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of assigned roles"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Space-separated list of scopes"
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Expiration time (Unix epoch seconds)"
+    },
+    "iss": {
+      "type": "string",
+      "description": "Issuer identifier"
+    },
+    "aud": {
+      "type": "string",
+      "description": "Audience identifier"
+    }
+  },
+  "required": ["sub", "roles", "scope", "exp"]
+}

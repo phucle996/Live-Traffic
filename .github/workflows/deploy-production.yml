@@ -1,0 +1,64 @@
+# ==============================================================================
+# Deploy to Production Workflow (.github/workflows/deploy-production.yml)
+# GATE: Manual approval required via GitHub Environment protection rule.
+# Auto-rollback via helm rollback on deployment failure.
+# ==============================================================================
+
+name: Deploy to Production
+
+on:
+  # Only triggers after staging deploy (including smoke test) succeeds
+  workflow_run:
+    workflows: ["Deploy to Staging"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  deploy-production:
+    name: Helm Deploy → Production Namespace
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # "production" environment must have required_reviewers configured
+    # in GitHub repo settings → Environments → production
+    environment: production
+    timeout-minutes: 30
+
+    env:
+      IMAGE_TAG: ${{ github.sha }}
+      REGISTRY: ghcr.io/${{ github.repository_owner }}
+      NAMESPACE: production
+      RELEASE_NAME: traffic-prediction
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Configure kubectl with production cluster credentials
+      - name: Configure kubectl
+        uses: azure/k8s-set-context@v4
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG_PRODUCTION }}
+
+      # Step 3: Helm upgrade to production — uses immutable SHA tag
+      - name: Helm deploy to production
+        id: helm_deploy
+        run: |
+          helm upgrade --install "$RELEASE_NAME" deploy/helm/ \
+            --namespace "$NAMESPACE" \
+            --create-namespace \
+            --values deploy/helm/values-production.yaml \
+            --set image.tag="${IMAGE_TAG}" \
+            --set image.registry="${REGISTRY}" \
+            --atomic \
+            --timeout 10m
+
+      # Step 4: Rollback automatically if Helm deploy fails
+      # --atomic flag on helm upgrade already handles rollback,
+      # but we also call rollback_deployment.sh for notifications.
+      - name: Rollback on failure
+        if: failure()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: bash scripts/rollback_deployment.sh "$RELEASE_NAME" "$NAMESPACE"

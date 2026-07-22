@@ -1,0 +1,23 @@
+# ==============================================================================
+# Raw Data Quality Expectations Specification (config/data_quality/raw_expectations.yaml)
+# ==============================================================================
+
+expectations:
+  non_null_columns:
+    - "Location/Street"
+    - "Timestamp"
+    - "Latitude"
+    - "Longitude"
+  range_validations:
+    CurrentSpeed:
+      min: 0.0
+      max: 150.0
+    FreeFlowSpeed:
+      min: 0.0
+      max: 150.0
+    Latitude:
+      min: 10.0
+      max: 11.5
+    Longitude:
+      min: 106.0
+      max: 107.5

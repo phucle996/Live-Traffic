@@ -1,0 +1,24 @@
+{
+  "catalog_version": "v2.0",
+  "generated_at": "2026-07-21T18:16:54.497963+00:00",
+  "total_segments": 12,
+  "checksum_sha256": "96d907658dec8aa9e6ac8330405a3ffaa8ef75929d1c0461db3cdc56aebb3cea",
+  "district_coverage": [
+    "Bình Thạnh",
+    "Quận 7",
+    "Quận 1",
+    "TP. Thủ Đức",
+    "Quận 3",
+    "Quận 12",
+    "Quận 5"
+  ],
+  "road_class_breakdown": {
+    "motorway": 1,
+    "secondary": 2,
+    "primary": 5,
+    "trunk": 4
+  },
+  "files": {
+    "json": "road_segments.json"
+  }
+}

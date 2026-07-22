@@ -1,0 +1,68 @@
+# ==============================================================================
+# TP.HCM Coverage Cells Configuration (config/coverage/hcm_cells.yaml)
+# Phase R5 — Cấu hình danh sách các cell bounding box cố định của TP.HCM
+# Có thể thêm/sửa cell mà không cần rebuild Go binary.
+# ==============================================================================
+version: "v1.0"
+description: "TP.HCM Fixed Bounding Box Coverage Cells"
+
+cells:
+  - id: "cell_q1_center"
+    name: "Quận 1 — Trung tâm"
+    priority: 1
+    bbox:
+      south: 10.7600
+      west: 106.6920
+      north: 10.7900
+      east: 106.7100
+    polling_interval_sec: 180
+
+  - id: "cell_binh_thanh"
+    name: "Bình Thạnh — Hàng Xanh"
+    priority: 1
+    bbox:
+      south: 10.7950
+      west: 106.7000
+      north: 10.8200
+      east: 106.7300
+    polling_interval_sec: 180
+
+  - id: "cell_tan_son_nhat"
+    name: "Sân bay Tân Sơn Nhất"
+    priority: 1
+    bbox:
+      south: 10.8000
+      west: 106.6550
+      north: 10.8300
+      east: 106.6850
+    polling_interval_sec: 180
+
+  - id: "cell_thu_duc"
+    name: "TP. Thủ Đức — Xa lộ Hà Nội"
+    priority: 2
+    bbox:
+      south: 10.8450
+      west: 106.7700
+      north: 10.8900
+      east: 106.8200
+    polling_interval_sec: 450
+
+  - id: "cell_quan_7"
+    name: "Quận 7 — Phú Mỹ Hưng"
+    priority: 2
+    bbox:
+      south: 10.7200
+      west: 106.7100
+      north: 10.7500
+      east: 106.7400
+    polling_interval_sec: 450
+
+  - id: "cell_an_suong"
+    name: "Cửa ngõ An Sương — QL22"
+    priority: 3
+    bbox:
+      south: 10.8400
+      west: 106.6000
+      north: 10.8700
+      east: 106.6300
+    polling_interval_sec: 900
