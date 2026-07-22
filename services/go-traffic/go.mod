@@ -2,10 +2,7 @@ module go-traffic
 
 go 1.25.0
 
-require (
-	github.com/golang-jwt/jwt/v5 v5.3.1
-	github.com/prometheus/client_golang v1.24.0
-)
+require github.com/prometheus/client_golang v1.24.0
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect

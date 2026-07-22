@@ -79,4 +79,59 @@ impl RustFeatureBuilder {
             .map(|fname| *feat_map.get(fname.as_str()).unwrap_or(&0.0))
             .collect()
     }
+
+    /// Trích xuất vector f64 đặc trưng có dịch chuyển mốc thời gian (offset_minutes: +15m, +30m, +60m)
+    /// Giúp Mô hình AI Rust thực hiện suy luận chuỗi thời gian thực tế thay vì nhân hệ số giả lập trên client
+    pub fn build_feature_vector_with_offset(
+        lat: f64,
+        lon: f64,
+        free_flow_speed: f64,
+        confidence: f64,
+        dt_str: Option<&str>,
+        offset_minutes: i64,
+        target_features: &[String],
+    ) -> Vec<f64> {
+        let now = chrono::Local::now() + chrono::Duration::minutes(offset_minutes);
+        let (hour, minute, day_of_week) = if let Some(ts) = dt_str {
+            if let Ok(parsed) = chrono::NaiveDateTime::parse_from_str(ts, "%Y-%m-%d %H:%M:%S") {
+                let future = parsed + chrono::Duration::minutes(offset_minutes);
+                (
+                    future.hour() as f64,
+                    future.minute() as f64,
+                    future.weekday().num_days_from_monday() as f64,
+                )
+            } else {
+                (
+                    now.hour() as f64,
+                    now.minute() as f64,
+                    now.weekday().num_days_from_monday() as f64,
+                )
+            }
+        } else {
+            (
+                now.hour() as f64,
+                now.minute() as f64,
+                now.weekday().num_days_from_monday() as f64,
+            )
+        };
+
+        let time_in_minutes = hour * 60.0 + minute;
+        let is_weekend = if day_of_week >= 5.0 { 1.0 } else { 0.0 };
+
+        let mut feat_map = HashMap::new();
+        feat_map.insert("Latitude", lat);
+        feat_map.insert("Longitude", lon);
+        feat_map.insert("FreeFlowSpeed", free_flow_speed);
+        feat_map.insert("Confidence", confidence);
+        feat_map.insert("Hour", hour);
+        feat_map.insert("Minute", minute);
+        feat_map.insert("TimeInMinutes", time_in_minutes);
+        feat_map.insert("DayOfWeek", day_of_week);
+        feat_map.insert("Weekend", is_weekend);
+
+        target_features
+            .iter()
+            .map(|fname| *feat_map.get(fname.as_str()).unwrap_or(&0.0))
+            .collect()
+    }
 }

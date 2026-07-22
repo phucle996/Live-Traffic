@@ -3,8 +3,6 @@
 # Hadoop HDFS (NameNode/DataNode), Apache Spark (Master/Worker), Apache Kafka & ZooKeeper, & Streamlit Dashboard
 # ==============================================================================
 
-version: '3.8'
-
 # Custom bridge network isolating traffic prediction system containers
 networks:
   traffic-net:
@@ -32,8 +30,8 @@ services:
     container_name: namenode
     restart: always
     ports:
-      - "9000:9000"   # HDFS RPC Service Port
-      - "9870:9870"   # NameNode Web UI Dashboard Port
+      - "9090:9000" # HDFS RPC Host Port Mapping (Chuyển Host Port sang 9090 để tránh trùng với MinIO/dịch vụ khác)
+      - "9870:9870" # NameNode Web UI Dashboard Port
     environment:
       - CLUSTER_NAME=traffic_cluster
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
@@ -42,7 +40,7 @@ services:
     networks:
       - traffic-net
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9870/ || exit 1"]
+      test: [ "CMD-SHELL", "curl -f http://localhost:9870/ || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -56,7 +54,7 @@ services:
     container_name: datanode
     restart: always
     ports:
-      - "9864:9864"   # DataNode Web UI Port
+      - "9864:9864" # DataNode Web UI Port
     environment:
       - SERVICE_PRECONDITION=namenode:9870
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
@@ -75,10 +73,10 @@ services:
     image: apache/spark:3.5.0
     container_name: spark-master
     restart: always
-    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
+    command: [ "/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master" ]
     ports:
-      - "7077:7077"   # Spark Master RPC Connection Port
-      - "8080:8080"   # Spark Master Web UI Dashboard Port
+      - "7077:7077" # Spark Master RPC Connection Port
+      - "8080:8080" # Spark Master Web UI Dashboard Port
     environment:
       - SPARK_MODE=master
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
@@ -97,9 +95,9 @@ services:
     image: apache/spark:3.5.0
     container_name: spark-worker
     restart: always
-    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077"]
+    command: [ "/opt/spark/bin/spark-class", "org.apache.spark.deploy.worker.Worker", "spark://spark-master:7077" ]
     ports:
-      - "8081:8081"   # Spark Worker Web UI Port
+      - "8081:8081" # Spark Worker Web UI Port
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
@@ -112,7 +110,6 @@ services:
     depends_on:
       - spark-master
 
-
   # ============================================================================
   # 5. ZooKeeper Coordination Service for Kafka
   # ============================================================================
@@ -121,7 +118,7 @@ services:
     container_name: zookeeper
     restart: always
     ports:
-      - "2181:2181"   # ZooKeeper Client Port
+      - "2181:2181" # ZooKeeper Client Port
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -138,8 +135,8 @@ services:
     container_name: kafka
     restart: always
     ports:
-      - "9092:9092"     # Container internal/bridge port
-      - "29092:29092"   # External host port
+      - "9092:9092" # Container internal/bridge port
+      - "29092:29092" # External host port
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -167,7 +164,7 @@ services:
       - traffic-net
     environment:
       - HDFS_URI=hdfs://namenode:9000
-    entrypoint: ["/bin/bash", "/scripts/init_hdfs.sh"]
+    entrypoint: [ "/bin/bash", "/scripts/init_hdfs.sh" ]
     depends_on:
       namenode:
         condition: service_healthy
@@ -183,7 +180,7 @@ services:
     container_name: web-dashboard
     restart: always
     ports:
-      - "8501:8501"   # Expose UI Port 8501 cho phép xem Web Dashboard trực tiếp hoặc qua NGINX (Port 80)
+      - "8501:8501" # Expose UI Port 8501 cho phép xem Web Dashboard trực tiếp hoặc qua NGINX (Port 80)
     environment:
       - PORT=8501
       - GO_LIVE_API_URL=http://go-live-api:8084
@@ -195,7 +192,6 @@ services:
     depends_on:
       - go-live-api
       - rust-inference-api
-
 
   # ============================================================================
   # 9. Cloud-Native Rust Inference API Service (Phase H4)
@@ -264,7 +260,6 @@ services:
       kafka:
         condition: service_started
 
-
   # ============================================================================
   # 12. NGINX Ingress Router Gateway Service (Phase H10)
   # High-Availability Unified Reverse Proxy Router (Port 80)
@@ -275,7 +270,7 @@ services:
     container_name: nginx-gateway
     restart: always
     ports:
-      - "80:80"   # Ingress Gateway Port 80 công khai duy nhất
+      - "80:80" # Ingress Gateway Port 80 công khai duy nhất
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     networks:
@@ -284,7 +279,6 @@ services:
       - rust-inference-api
       - go-live-api
       - web-dashboard
-
 
   # ============================================================================
   # 13. PostgreSQL 15 + PostGIS 3.3 Spatial Database Service (Phase ROAD-1)
@@ -295,24 +289,19 @@ services:
     container_name: postgres-postgis
     restart: always
     ports:
-      - "5432:5432"   # PostgreSQL Standard Port
+      - "5432:5432" # PostgreSQL Standard Port
     environment:
       - POSTGRES_DB=traffic_db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./db/migrations:/docker-entrypoint-initdb.d:ro  # Tự động nạp migrations (001, 002, 003) khi khởi tạo
+      - ./db/migrations:/docker-entrypoint-initdb.d:ro # Tự động nạp migrations (001, 002, 003) khi khởi tạo
     networks:
       - traffic-net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d traffic_db || exit 1"]
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d traffic_db || exit 1" ]
       interval: 5s
       timeout: 5s
       retries: 5
       start_period: 10s
-
-
-
-
-

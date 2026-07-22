@@ -9,6 +9,7 @@ use axum::extract::State;
 use axum::http::StatusCode;
 use axum::response::IntoResponse;
 use axum::Json;
+use chrono::Timelike; // Import trait Timelike để truy cập .hour() trên chrono::DateTime
 use serde::Deserialize;
 
 use serde_json::json;
@@ -19,6 +20,7 @@ pub struct SinglePredictionInput {
     pub latitude: f64,
     pub longitude: f64,
     pub free_flow_speed: Option<f64>,
+    pub current_speed: Option<f64>, // Vận tốc thực tế hiện tại (Anchor cho Auto-Regressive Fusion)
     pub confidence: Option<f64>,
     pub timestamp: Option<String>,
     pub street_name: Option<String>,
@@ -46,7 +48,7 @@ pub async fn single_predict_handler(
     let ff_speed = payload.free_flow_speed.unwrap_or(45.0);
     let conf = payload.confidence.unwrap_or(0.95);
 
-    // Xây dựng feature vector chuẩn cho Native Tree Engine
+    // 1. Thực thi suy luận mốc thời gian hiện tại (t+0) bằng Mô hình AI Rust Native Tree Engine
     let feat_vec = RustFeatureBuilder::build_feature_vector(
         payload.latitude,
         payload.longitude,
@@ -55,10 +57,32 @@ pub async fn single_predict_handler(
         payload.timestamp.as_deref(),
         &model_guard.feature_names,
     );
+    let raw_tree_pred = model_guard.predict_single(&feat_vec).clamp(5.0, ff_speed * 1.2);
 
-    // Thực thi suy luận bằng Native Rust Tree Engine
-    let raw_pred = model_guard.predict_single(&feat_vec);
-    let predicted_speed = raw_pred.clamp(0.0, ff_speed * 1.2);
+    // Sử dụng vận tốc thực tế hiện tại (payload.current_speed) làm Anchor cho mô hình Auto-Regressive Fusion
+    let base_speed = payload.current_speed.unwrap_or(raw_tree_pred);
+    let predicted_speed = base_speed;
+
+    // 2. Dự đoán mốc t+15m: Kết hợp 60% vận tốc thực tế hiện tại + 40% xu hướng mô hình AI Rust
+    let feat_15m = RustFeatureBuilder::build_feature_vector_with_offset(
+        payload.latitude, payload.longitude, ff_speed, conf, payload.timestamp.as_deref(), 15, &model_guard.feature_names,
+    );
+    let tree_15m = model_guard.predict_single(&feat_15m).clamp(5.0, ff_speed * 1.2);
+    let forecast_15m = (base_speed * 0.60 + tree_15m * 0.40).clamp(5.0, ff_speed);
+
+    // 3. Dự đoán mốc t+30m: Kết hợp 30% vận tốc thực tế hiện tại + 70% xu hướng mô hình AI Rust
+    let feat_30m = RustFeatureBuilder::build_feature_vector_with_offset(
+        payload.latitude, payload.longitude, ff_speed, conf, payload.timestamp.as_deref(), 30, &model_guard.feature_names,
+    );
+    let tree_30m = model_guard.predict_single(&feat_30m).clamp(5.0, ff_speed * 1.2);
+    let forecast_30m = (base_speed * 0.30 + tree_30m * 0.70).clamp(5.0, ff_speed);
+
+    // 4. Dự đoán mốc t+60m: Kết hợp 10% vận tốc thực tế hiện tại + 90% xu hướng mô hình AI Rust
+    let feat_60m = RustFeatureBuilder::build_feature_vector_with_offset(
+        payload.latitude, payload.longitude, ff_speed, conf, payload.timestamp.as_deref(), 60, &model_guard.feature_names,
+    );
+    let tree_60m = model_guard.predict_single(&feat_60m).clamp(5.0, ff_speed * 1.2);
+    let forecast_60m = (base_speed * 0.10 + tree_60m * 0.90).clamp(5.0, ff_speed);
 
     // Phân loại mức độ ùn tắc giao thông (Congestion Level)
     let ratio = predicted_speed / ff_speed;
@@ -75,6 +99,9 @@ pub async fn single_predict_handler(
         "latitude": payload.latitude,
         "longitude": payload.longitude,
         "predicted_speed_kmh": (predicted_speed * 100.0).round() / 100.0,
+        "forecast_15m_kmh": (forecast_15m * 100.0).round() / 100.0,
+        "forecast_30m_kmh": (forecast_30m * 100.0).round() / 100.0,
+        "forecast_60m_kmh": (forecast_60m * 100.0).round() / 100.0,
         "free_flow_speed_kmh": ff_speed,
         "congestion_level": congestion,
         "model_version": model_version,

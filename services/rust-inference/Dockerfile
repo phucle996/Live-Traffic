@@ -4,9 +4,8 @@
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
-# Stage 1: Build binary using official Rust 1.95 toolchain with Layer Caching
-# ------------------------------------------------------------------------------
-FROM rust:1.95-slim as builder
+# # Stage 1: Build binary using official Rust 1.95 toolchain with Layer Caching (Sử dụng chuẩn casing FROM ... AS)
+FROM rust:1.95-slim AS builder
 
 WORKDIR /usr/src/rust-inference
 
@@ -45,9 +44,8 @@ RUN touch crates/traffic-contract/src/lib.rs \
 RUN cargo build --release -p traffic-api
 
 # ------------------------------------------------------------------------------
-# Stage 2: Ultra-lightweight debian-slim runtime container (~30MB image size)
-# ------------------------------------------------------------------------------
-FROM debian:bookworm-slim as runtime
+# Stage 2: Ultra-lightweight debian-slim runtime container (~30MB image size - Sử dụng chuẩn casing FROM ... AS)
+FROM debian:bookworm-slim AS runtime
 
 WORKDIR /app
 

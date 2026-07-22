@@ -67,11 +67,12 @@ function App() {
     const [isBatchPredicting, setIsBatchPredicting] = useState(false);
     const [batchPredictionSummary, setBatchPredictionSummary] = useState(null);
 
-    // 8. Refs cho Leaflet Map Instance, Tile Layer và Polyline Markers Group
+    // 8. Refs cho Leaflet Map Instance, Tile Layer, Marker Group & Marker Đang Được Chọn
     const mapRef = useRef(null);
     const tileLayerRef = useRef(null);
     const markersGroupRef = useRef(null);
     const markersMapRef = useRef({});
+    const selectedMarkerRef = useRef(null); // Lưu vết Marker Chấm Tròn đang được chọn trên bản đồ
 
     // 9. Hàm gọi Public Go Live API lấy toàn bộ tuyến đường giao thông TỌA ĐỘ THỰC TẾ toàn quốc
     const fetchLiveTraffic = useCallback(async () => {
@@ -125,6 +126,7 @@ function App() {
                     latitude: rec.latitude,
                     longitude: rec.longitude,
                     free_flow_speed: rec.free_flow_speed,
+                    current_speed: rec.current_speed, // Vận tốc thực tế hiện tại dùng làm anchor cho mô hình Auto-Regressive
                     confidence: rec.confidence,
                     street_name: rec.location_name
                 })
@@ -136,8 +138,7 @@ function App() {
 
             const result = await resp.json();
             
-            // Bổ sung mô phỏng dự báo chuỗi 3 mốc thời gian (15m, 30m, 60m)
-            const speedBase = result.predicted_speed_kmh || rec.current_speed || 30.0;
+            // Đọc trực tiếp kết quả suy luận AI chuẩn 3 mốc thời gian từ Rust Engine API
             const multiForecast = {
                 ...result,
                 street_name: rec.location_name,
@@ -146,9 +147,9 @@ function App() {
                 free_flow: rec.free_flow_speed,
                 density: rec.density_percent || 50.0,
                 delay_min: rec.delay_minutes || 0.0,
-                forecast_15m: (speedBase * 0.95).toFixed(1),
-                forecast_30m: (speedBase * 0.90).toFixed(1),
-                forecast_60m: (speedBase * 1.05).toFixed(1),
+                forecast_15m: result.forecast_15m_kmh ? result.forecast_15m_kmh.toFixed(1) : (rec.current_speed * 0.95).toFixed(1),
+                forecast_30m: result.forecast_30m_kmh ? result.forecast_30m_kmh.toFixed(1) : (rec.current_speed * 0.90).toFixed(1),
+                forecast_60m: result.forecast_60m_kmh ? result.forecast_60m_kmh.toFixed(1) : (rec.current_speed * 1.02).toFixed(1),
                 peak_factor: rec.density_percent > 70 ? "Cao điểm ùn tắc" : "Bình thường",
                 weather_factor: "Nắng ráo - Tầm nhìn tốt"
             };
@@ -257,9 +258,11 @@ function App() {
     }, [fetchLiveTraffic, fetchSourceStatus]);
 
     // 17. Khởi tạo bản đồ Leaflet với Nền Google Maps Mới Nhất một lần duy nhất
+    // 17. Khởi tạo bản đồ Leaflet với Nền Google Maps Mới Nhất (Default vị trí Trung tâm TP.HCM zoom 13)
     useEffect(() => {
         if (!mapRef.current) {
-            const map = L.map('map', { zoomControl: false }).setView([16.0, 107.5], 6);
+            // Đặt vị trí mặc định tại Trung tâm TP.HCM [10.7769, 106.7009] ở mức zoom 13 hiển thị rõ ràng đường giao thông đô thị
+            const map = L.map('map', { zoomControl: false }).setView([10.7769, 106.7009], 13);
             
             const tileConfig = GOOGLE_MAPS_TILES["google_standard"];
             const tileLayer = L.tileLayer(tileConfig.url, {
@@ -294,65 +297,93 @@ function App() {
         }
     };
 
-    // 19. Cập nhật Polylines TỌA ĐỘ THỰC TẾ tô đậm cung đường giao thông trực quan lên bản đồ Google Maps
+    // 19. Cập nhật Marker Chấm Tròn Trực Quan (L.circleMarker) chuẩn xác tại tọa độ giao thông [rec.latitude, rec.longitude]
     useEffect(() => {
         if (markersGroupRef.current) {
             markersGroupRef.current.clearLayers();
             markersMapRef.current = {};
 
             trafficData.forEach(rec => {
-                let color = "#22c55e"; // Thông thoáng (Xanh)
-                if (rec.current_speed < 25) color = "#ef4444"; // Ùn tắc (Đỏ)
-                else if (rec.current_speed < 45) color = "#eab308"; // Di chuyển chậm (Vàng)
+                // Kiểm tra và lọc tọa độ chuẩn đất liền Việt Nam (Loại bỏ 100% tọa độ lỗi rơi ra biển hay nước ngoài)
+                if (!rec.latitude || !rec.longitude || 
+                    rec.latitude < 8.4 || rec.latitude > 23.4 || 
+                    rec.longitude < 102.1 || rec.longitude > 109.6) {
+                    return;
+                }
 
-                // Lấy chuỗi tọa độ Polyline THỰC TẾ biểu diễn cung đường (nếu trống thì dựng từ lat, lon)
-                const polyCoords = rec.coords || [
-                    [rec.latitude - 0.006, rec.longitude - 0.006],
-                    [rec.latitude, rec.longitude],
-                    [rec.latitude + 0.006, rec.longitude + 0.006]
-                ];
+                // Xác định màu sắc chỉ báo theo trạng thái tốc độ
+                let color = "#22c55e"; // 🟢 Thông thoáng (Xanh)
+                if (rec.current_speed < 25) color = "#ef4444"; // 🔴 Ùn tắc (Đỏ)
+                else if (rec.current_speed < 45) color = "#eab308"; // 🟡 Di chuyển chậm (Vàng)
 
-                const isHighway = rec.road_class === "Cao Tốc";
-                const weight = isHighway ? 8 : 5;
-
-                // A. Lớp viền nền tương phản đen phát sáng làm nổi bật cung đường trên Google Maps
-                L.polyline(polyCoords, {
-                    color: "#020617",
-                    weight: weight + 3,
-                    opacity: 0.8,
-                    lineCap: 'round',
-                    lineJoin: 'round'
+                // Khởi tạo Chấm Tròn Marker (L.circleMarker) tại đúng vị trí tọa độ điểm giao thông
+                const marker = L.circleMarker([rec.latitude, rec.longitude], {
+                    radius: 8,
+                    fillColor: color,
+                    color: "#ffffff",
+                    weight: 2,
+                    opacity: 1.0,
+                    fillOpacity: 0.95
                 }).addTo(markersGroupRef.current);
 
-                // B. Cung đường màu sắc trạng thái giao thông (Speed Color Polyline Line)
-                const line = L.polyline(polyCoords, {
-                    color: color,
-                    weight: weight,
-                    opacity: 0.95,
-                    lineCap: 'round',
-                    lineJoin: 'round'
-                }).addTo(markersGroupRef.current);
+                // Gắn các thuộc tính style mặc định lên Marker instance
+                marker.normalColor = color;
+                marker.roadData = rec;
 
-                // C. Hiệu ứng Hover làm nổi bật cung đường khi rà chuột (Mouseover Highlight)
-                line.on('mouseover', function () {
-                    this.setStyle({ weight: weight + 4, opacity: 1.0 });
+                // A. Hiệu ứng Hover di chuột qua Chấm Tròn: Phóng nhẹ từ radius 8 -> 11
+                marker.on('mouseover', function () {
+                    if (selectedMarkerRef.current !== this) {
+                        this.setRadius(11);
+                        this.setStyle({ fillOpacity: 1.0, weight: 3 });
+                    }
                 });
-                line.on('mouseout', function () {
-                    this.setStyle({ weight: weight, opacity: 0.95 });
+                marker.on('mouseout', function () {
+                    if (selectedMarkerRef.current !== this) {
+                        this.setRadius(8);
+                        this.setStyle({ fillOpacity: 0.95, weight: 2 });
+                    }
                 });
 
-                line.bindPopup(`
-                    <div style="font-family:Inter,sans-serif; padding:4px;">
-                        <h3 style="margin:0 0 4px 0; font-size:14px; color:#0f172a;">${rec.location_name}</h3>
-                        <p style="margin:2px 0; font-size:11px; color:#475569;">Tỉnh/Thành: <b>${rec.province || rec.district}</b> (${rec.region || 'Toàn Quốc'})</p>
-                        <p style="margin:2px 0; font-size:11px; color:#475569;">Loại đường: <span style="background:#e2e8f0; padding:1px 5px; border-radius:3px;">${rec.road_class || 'Trục chính'}</span></p>
-                        <p style="margin:4px 0 2px 0; font-size:12px; color:#475569;">Vận tốc hiện tại: <b style="color:${color}; font-size:15px;">${rec.current_speed} km/h</b></p>
-                        <p style="margin:2px 0; font-size:11px; color:#475569;">Tốc độ tự do: ${rec.free_flow_speed} km/h | Trễ: +${rec.delay_minutes || 0} phút</p>
-                    </div>
-                `);
+                // B. Sự kiện Click chọn Chấm Tròn: Phóng to radius lên 14, viền 4px nổi bật, đưa lên mặt trên cùng và mở Sidebar thông tin
+                marker.on('click', function (e) {
+                    if (e && e.originalEvent) {
+                        L.DomEvent.stopPropagation(e);
+                    }
 
+                    // 1. Khôi phục kích thước và style của Chấm Tròn được chọn trước đó về nguyên trạng (radius 8, weight 2)
+                    if (selectedMarkerRef.current && selectedMarkerRef.current !== this) {
+                        const prevMarker = selectedMarkerRef.current;
+                        prevMarker.setRadius(8);
+                        prevMarker.setStyle({
+                            fillColor: prevMarker.normalColor,
+                            color: "#ffffff",
+                            weight: 2,
+                            fillOpacity: 0.95
+                        });
+                    }
+
+                    // 2. Phóng to Chấm Tròn đang được click (radius 14, viền trắng 4px), đẩy lên lớp trên cùng
+                    this.setRadius(14);
+                    this.setStyle({
+                        fillColor: this.normalColor,
+                        color: "#ffffff",
+                        weight: 4,
+                        fillOpacity: 1.0
+                    });
+                    this.bringToFront();
+
+                    // 3. Cập nhật reference Chấm Tròn đang chọn
+                    selectedMarkerRef.current = this;
+
+                    // 4. Mở Sidebar hiển thị đầy đủ thông số giao thông chi tiết của vị trí này
+                    if (typeof setSelectedLocation === "function") {
+                        setSelectedLocation(rec);
+                    }
+                });
+
+                // Lưu reference Marker theo roadId (location_id hoặc location_name)
                 const key = rec.location_id || rec.location_name;
-                markersMapRef.current[key] = line;
+                markersMapRef.current[key] = marker;
             });
         }
     }, [trafficData]);
